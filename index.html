@@ -488,3 +488,3157 @@ update();
 </script>
 </body>
 </html>
+.exercise-info{
+padding:20px 18px
+}
+
+.exercise-info h1{
+font-size:28px;
+letter-spacing:-.06em;
+margin:0
+}
+
+.exercise-info p{
+color:#9aa7ab;
+font-size:13px;
+line-height:1.45
+}
+
+.set-table{
+background:#101d24;
+border-radius:21px;
+padding:8px 12px;
+margin-top:16px
+}
+
+.set-head,
+.set-row{
+display:grid;
+grid-template-columns:40px 1fr 1fr;
+gap:9px;
+align-items:center
+}
+
+.set-head{
+padding:7px 0;
+color:#738389;
+font-size:9px;
+text-transform:uppercase;
+letter-spacing:.1em;
+font-weight:800
+}
+
+.set-row{
+padding:8px 0;
+border-top:1px solid var(--line)
+}
+
+.set-no{
+font-size:11px;
+font-weight:850;
+color:#a8b3b6
+}
+
+.input{
+width:100%;
+background:#192a32;
+border:1px solid rgba(255,255,255,.08);
+border-radius:12px;
+color:#fff;
+padding:11px 10px;
+text-align:center;
+outline:0
+}
+
+.input:focus{
+border-color:var(--green)
+}
+
+.timer{
+margin-top:12px;
+background:#0d1b22;
+border:1px solid var(--line);
+border-radius:22px;
+padding:15px;
+display:flex;
+align-items:center;
+justify-content:space-between
+}
+
+.timer strong{
+font-size:27px;
+letter-spacing:-.06em
+}
+
+.timer small{
+display:block;
+color:#829096;
+font-size:10px;
+text-transform:uppercase;
+letter-spacing:.1em
+}
+
+.timer button{
+border:0;
+background:#e9efec;
+color:#152024;
+border-radius:13px;
+padding:10px 13px;
+font-size:12px;
+font-weight:850
+}
+
+.calendar-wrap{
+background:var(--card);
+color:var(--ink);
+border-radius:24px;
+padding:17px
+}
+
+.cal-head{
+display:flex;
+align-items:center;
+justify-content:space-between
+}
+
+.cal-head h2{
+font-size:19px;
+letter-spacing:-.04em;
+margin:0
+}
+
+.cal-head button{
+border:0;
+background:#e7ece9;
+width:34px;
+height:34px;
+border-radius:11px;
+font-weight:900
+}
+
+.weekdays,
+.days{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:5px
+}
+
+.weekdays{
+margin-top:16px
+}
+
+.weekdays div{
+text-align:center;
+color:#829095;
+font-size:9px;
+font-weight:850;
+text-transform:uppercase
+}
+
+.days{
+margin-top:7px
+}
+
+.day{
+min-height:52px;
+border:0;
+background:#f0f3f1;
+border-radius:12px;
+padding:6px;
+position:relative;
+text-align:left
+}
+
+.day.muted{
+opacity:.35
+}
+
+.day.today{
+outline:2px solid var(--green)
+}
+
+.day .n{
+font-size:11px;
+font-weight:850
+}
+
+.dots{
+display:flex;
+gap:3px;
+position:absolute;
+bottom:7px;
+left:7px
+}
+
+.dot{
+width:5px;
+height:5px;
+border-radius:50%
+}
+
+.dot.s{
+background:#172126
+}
+
+.dot.m{
+background:#8f6f43
+}
+
+.dot.r{
+background:#4e7a9d
+}
+
+.dot.x{
+background:#7a5d85
+}
+
+.log-list{
+margin-top:12px;
+display:grid;
+gap:9px
+}
+
+.log-item{
+background:#fff;
+color:var(--ink);
+border-radius:18px;
+padding:14px;
+display:flex;
+justify-content:space-between;
+align-items:center
+}
+
+.log-item h4{
+margin:0;
+font-size:14px
+}
+
+.log-item p{
+margin:4px 0 0;
+color:#78858a;
+font-size:11px
+}
+
+.log-type{
+font-size:10px;
+font-weight:900;
+text-transform:uppercase;
+letter-spacing:.1em;
+color:#536268
+}
+
+.tabs{
+display:flex;
+gap:6px;
+background:#101d24;
+border-radius:15px;
+padding:4px
+}
+
+.tab{
+flex:1;
+border:0;
+background:transparent;
+color:#809096;
+border-radius:12px;
+padding:10px 4px;
+font-size:11px;
+font-weight:850
+}
+
+.tab.active{
+background:#fff;
+color:#122025
+}
+
+.chart{
+height:160px;
+background:#0d1b22;
+border-radius:20px;
+padding:16px;
+display:flex;
+align-items:end;
+gap:7px;
+margin-top:12px
+}
+
+.bar-wrap{
+flex:1;
+height:100%;
+display:flex;
+align-items:end;
+justify-content:center;
+position:relative
+}
+
+.bar{
+width:100%;
+max-width:28px;
+border-radius:8px 8px 4px 4px;
+background:var(--green);
+min-height:5px
+}
+
+.bar-label{
+position:absolute;
+bottom:-2px;
+transform:translateY(100%);
+font-size:8px;
+color:#708086
+}
+
+.chart-spacer{
+height:12px
+}
+
+.metric-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px;
+margin-top:12px
+}
+
+.metric-card{
+background:#fff;
+color:var(--ink);
+border-radius:18px;
+padding:14px
+}
+
+.metric-card small{
+color:#7a878c;
+font-size:9px;
+text-transform:uppercase;
+letter-spacing:.09em;
+font-weight:850
+}
+
+.metric-card strong{
+display:block;
+font-size:23px;
+letter-spacing:-.05em;
+margin-top:5px
+}
+
+.distribution{
+margin-top:12px;
+background:#101d24;
+border-radius:20px;
+padding:16px
+}
+
+.dist-row{
+margin-top:13px
+}
+
+.dist-top{
+display:flex;
+justify-content:space-between;
+font-size:11px;
+font-weight:800
+}
+
+.dist-track{
+height:7px;
+background:#1d2c33;
+border-radius:999px;
+overflow:hidden;
+margin-top:6px
+}
+
+.dist-track i{
+display:block;
+height:100%;
+background:var(--green)
+}
+
+.more-list{
+display:grid;
+gap:9px
+}
+
+.more-item{
+width:100%;
+border:0;
+text-align:left;
+background:#fff;
+color:var(--ink);
+border-radius:19px;
+padding:16px;
+display:flex;
+justify-content:space-between;
+align-items:center
+}
+
+.more-item h3{
+font-size:15px;
+margin:0
+}
+
+.more-item p{
+font-size:11px;
+color:#7b888d;
+margin:4px 0 0
+}
+
+.chev{
+font-weight:900;
+color:#6c797e
+}
+
+.form-card{
+background:#fff;
+color:var(--ink);
+border-radius:22px;
+padding:17px
+}
+
+.field{
+margin-top:13px
+}
+
+.field label{
+display:block;
+font-size:10px;
+text-transform:uppercase;
+letter-spacing:.1em;
+font-weight:850;
+color:#748186;
+margin-bottom:6px
+}
+
+.field input,
+.field select,
+.field textarea{
+width:100%;
+border:1px solid #dbe1de;
+border-radius:13px;
+background:#f4f6f4;
+padding:12px;
+outline:0
+}
+
+.field textarea{
+min-height:90px;
+resize:vertical
+}
+
+.empty{
+padding:32px 15px;
+text-align:center;
+color:#829095
+}
+
+.empty strong{
+display:block;
+color:#dce2e3;
+margin-bottom:6px
+}
+
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.62);
+display:none;
+align-items:end;
+justify-content:center;
+z-index:50
+}
+
+.modal.show{
+display:flex
+}
+
+.sheet{
+width:min(100%,540px);
+max-height:88vh;
+overflow:auto;
+background:#f6f7f5;
+color:var(--ink);
+border-radius:28px 28px 0 0;
+padding:18px
+}
+
+.sheet-head{
+display:flex;
+justify-content:space-between;
+align-items:center
+}
+
+.sheet-head h2{
+margin:0;
+font-size:21px;
+letter-spacing:-.045em
+}
+
+.close{
+border:0;
+background:#e6ebe8;
+width:34px;
+height:34px;
+border-radius:11px;
+font-weight:900
+}
+
+.nav{
+position:fixed;
+left:50%;
+bottom:10px;
+transform:translateX(-50%);
+width:min(calc(100% - 20px),500px);
+z-index:40;
+background:rgba(15,27,34,.94);
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+border:0!important;
+outline:0!important;
+box-shadow:0 12px 40px rgba(0,0,0,.35);
+border-radius:23px;
+padding:7px;
+display:grid;
+grid-template-columns:repeat(5,1fr)
+}
+
+.nav button{
+appearance:none;
+-webkit-appearance:none;
+border:0!important;
+outline:0!important;
+box-shadow:none!important;
+background:transparent;
+color:#74848a;
+border-radius:17px;
+padding:9px 3px 8px;
+font-size:9px;
+font-weight:850
+}
+
+.nav button.active{
+background:#fff;
+color:#152126
+}
+
+.nav-icon{
+height:19px;
+font-size:14px;
+font-weight:950;
+display:grid;
+place-items:center;
+margin-bottom:2px
+}
+
+.toast{
+position:fixed;
+left:50%;
+bottom:95px;
+transform:translate(-50%,20px);
+background:#fff;
+color:#132025;
+padding:11px 15px;
+border-radius:14px;
+font-size:12px;
+font-weight:850;
+opacity:0;
+pointer-events:none;
+transition:.2s;
+z-index:70;
+box-shadow:0 10px 30px rgba(0,0,0,.25)
+}
+
+.toast.show{
+opacity:1;
+transform:translate(-50%,0)
+}
+
+@media(min-width:700px){
+body{
+padding:20px
+}
+
+.app{
+border-radius:28px;
+overflow:hidden;
+box-shadow:0 20px 80px rgba(0,0,0,.5)
+}
+
+.nav{
+bottom:22px
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<section id="home" class="screen active">
+
+<div class="topbar">
+<div class="brand">Louwe Fitness</div>
+<button class="top-action" onclick="go('more')">
+<span>+</span>
+</button>
+</div>
+
+<div class="hero">
+<div class="hero-content">
+<div class="eyebrow">BUILD STRENGTH. GO OUTSIDE.</div>
+
+<h1>
+Jouw training.<br>
+Jouw data.
+</h1>
+
+<p>
+Kies vandaag wat past. Ik hou de progressie voor je bij.
+</p>
+
+</div>
+</div>
+
+<div class="content">
+
+<div class="section-head">
+<h2>Wat ga je doen?</h2>
+</div>
+
+<div class="grid2">
+
+<button class="activity-card primary" onclick="startStrength()">
+<div class="symbol">K</div>
+<h3>Kracht</h3>
+<p>Progressieve training</p>
+</button>
+
+<button class="activity-card" onclick="openLog('mtb')">
+<div class="symbol">M</div>
+<h3>Mountainbike</h3>
+<p>Km · tijd · hoogtemeters</p>
+</button>
+
+<button class="activity-card" onclick="openLog('run')">
+<div class="symbol">R</div>
+<h3>Hardlopen</h3>
+<p>Km · tijd · tempo</p>
+</button>
+
+<button class="activity-card wide" onclick="openLog('squash')">
+<div class="symbol">S</div>
+
+<div>
+<h3>Squash</h3>
+<p>Losse sessie registreren</p>
+</div>
+
+</button>
+
+</div>
+
+<div class="section-head">
+<h2>Deze week</h2>
+<button onclick="go('data')">Bekijk data</button>
+</div>
+
+<div class="stats" id="homeStats"></div>
+
+<div class="insight" id="homeInsight"></div>
+
+<div class="section-head">
+<h2>Laatste activiteit</h2>
+<button onclick="go('calendar')">Kalender</button>
+</div>
+
+<div id="recentHome"></div>
+
+</div>
+</section>
+
+<section id="workouts" class="screen">
+
+<div class="page-title">
+<div class="eyebrow">TRAINING</div>
+<h1>Kracht</h1>
+</div>
+
+<div class="content">
+
+<div class="workout-card">
+
+<div class="workout-cover">
+<h2>Full Body A</h2>
+</div>
+
+<div class="workout-body">
+
+<div class="workout-meta">
+<span class="pill">7 oefeningen</span>
+<span class="pill">45–60 min</span>
+<span class="pill">6–10 reps</span>
+</div>
+
+<div id="exercisePreview"></div>
+
+<button class="primary-btn" onclick="startStrength()">
+Start workout
+</button>
+
+</div>
+</div>
+
+<div class="section-head">
+<h2>Progressie</h2>
+</div>
+
+<div class="dark-card" style="padding:17px" id="progressSummary"></div>
+
+</div>
+</section>
+
+<section id="calendar" class="screen">
+
+<div class="page-title">
+<div class="eyebrow">OVERZICHT</div>
+<h1>Kalender</h1>
+</div>
+
+<div class="content">
+
+<div class="calendar-wrap">
+
+<div class="cal-head">
+<button onclick="changeMonth(-1)">‹</button>
+<h2 id="monthTitle"></h2>
+<button onclick="changeMonth(1)">›</button>
+</div>
+
+<div class="weekdays">
+<div>Ma</div>
+<div>Di</div>
+<div>Wo</div>
+<div>Do</div>
+<div>Vr</div>
+<div>Za</div>
+<div>Zo</div>
+</div>
+
+<div class="days" id="calendarDays"></div>
+
+</div>
+
+<div class="section-head">
+<h2>Activiteiten</h2>
+</div>
+
+<div id="calendarList" class="log-list"></div>
+
+</div>
+</section>
+
+<section id="data" class="screen">
+
+<div class="page-title">
+<div class="eyebrow">JOUW DATA</div>
+<h1>Progressie</h1>
+</div>
+
+<div class="content">
+
+<div class="tabs">
+
+<button class="tab active"
+data-range="week"
+onclick="setRange('week',this)">
+Week
+</button>
+
+<button class="tab"
+data-range="month"
+onclick="setRange('month',this)">
+Maand
+</button>
+
+<button class="tab"
+data-range="all"
+onclick="setRange('all',this)">
+Alles
+</button>
+
+</div>
+
+<div class="metric-grid" id="dataMetrics"></div>
+
+<div class="section-head">
+<h2>Activiteit</h2>
+</div>
+
+<div class="chart" id="activityChart"></div>
+
+<div class="chart-spacer"></div>
+
+<div class="distribution" id="distribution"></div>
+
+<div class="section-head">
+<h2>Kracht</h2>
+</div>
+
+<div class="dark-card"
+style="padding:17px"
+id="strengthData">
+</div>
+
+</div>
+</section>
+
+<section id="more" class="screen">
+
+<div class="page-title">
+<div class="eyebrow">LOUWE FITNESS</div>
+<h1>Meer</h1>
+</div>
+
+<div class="content">
+
+<div class="more-list">
+
+<button class="more-item" onclick="showSettings()">
+
+<div>
+<h3>Instellingen</h3>
+<p>Profiel, voorkeuren en data</p>
+</div>
+
+<div class="chev">›</div>
+
+</button>
+
+<button class="more-item" onclick="exportData()">
+
+<div>
+<h3>Data exporteren</h3>
+<p>Maak een back-up van je trainingen</p>
+</div>
+
+<div class="chev">›</div>
+
+</button>
+
+<button class="more-item" onclick="openLog('mtb')">
+
+<div>
+<h3>Activiteit toevoegen</h3>
+<p>MTB, hardlopen of squash</p>
+</div>
+
+<div class="chev">›</div>
+
+</button>
+
+</div>
+
+<div id="settingsArea" style="margin-top:12px"></div>
+
+</div>
+</section>
+
+<section id="strengthSession" class="screen">
+
+<div class="workout-header">
+
+<button class="back" onclick="go('workouts')">
+‹ Terug
+</button>
+
+<div style="display:flex;justify-content:space-between;align-items:end">
+
+<div>
+
+<div class="eyebrow">
+FULL BODY A
+</div>
+
+<div id="sessionCounter"
+style="font-size:25px;font-weight:900;letter-spacing:-.05em;margin-top:4px">
+</div>
+
+</div>
+
+<div id="sessionTime"
+style="color:#8fa0a5;font-size:12px">
+</div>
+
+</div>
+
+<div class="progressline">
+<i id="sessionProgress"></i>
+</div>
+
+</div>
+
+<div class="exercise-hero">
+
+<div class="big-letter" id="exerciseLetter">
+GS
+</div>
+
+<div class="muscle" id="exerciseMuscle"></div>
+
+</div>
+
+<div class="exercise-info">
+
+<h1 id="exerciseName"></h1>
+
+<p id="exerciseDescription"></p>
+
+<div class="set-table">
+
+<div class="set-head">
+<div>Set</div>
+<div>KG</div>
+<div>Reps</div>
+</div>
+
+<div id="setRows"></div>
+
+</div>
+
+<div class="timer">
+
+<div>
+<small>Rust</small>
+<strong id="timerText">01:30</strong>
+</div>
+
+<button onclick="toggleTimer()">
+Start timer
+</button>
+
+</div>
+
+<button class="primary-btn"
+onclick="nextExercise()"
+id="nextExerciseBtn">
+Volgende oefening
+</button>
+
+</div>
+
+</section>
+
+</div>
+
+<nav class="nav" id="nav">
+
+<button class="active"
+data-screen="home"
+onclick="go('home')">
+<div class="nav-icon">D</div>
+Vandaag
+</button>
+
+<button
+data-screen="workouts"
+onclick="go('workouts')">
+<div class="nav-icon">K</div>
+Workouts
+</button>
+
+<button
+data-screen="calendar"
+onclick="go('calendar')">
+<div class="nav-icon">C</div>
+Kalender
+</button>
+
+<button
+data-screen="data"
+onclick="go('data')">
+<div class="nav-icon">↗</div>
+Data
+</button>
+
+<button
+data-screen="more"
+onclick="go('more')">
+<div class="nav-icon">•••</div>
+Meer
+</button>
+
+</nav>
+
+<div class="modal"
+id="modal"
+onclick="if(event.target===this)closeModal()">
+
+<div class="sheet" id="sheet"></div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+ const KEY='louweFitnessV3';
+
+const exercises=[
+{
+id:'goblet_squat',
+name:'Goblet squat',
+muscle:'Benen · core',
+letter:'GS',
+desc:'Zak gecontroleerd, houd je romp sterk en duw vanuit je hele voet.',
+sets:3,
+min:6,
+max:10,
+step:2
+},
+{
+id:'floor_press',
+name:'Kettlebell floor press',
+muscle:'Borst · triceps',
+letter:'FP',
+desc:'Schouders stabiel, ellebogen gecontroleerd en krachtig omhoog.',
+sets:3,
+min:6,
+max:10,
+step:2
+},
+{
+id:'row',
+name:'Kettlebell row',
+muscle:'Rug · biceps',
+letter:'KR',
+desc:'Trek je elleboog richting heup en voorkom draaien van je romp.',
+sets:3,
+min:6,
+max:10,
+step:2
+},
+{
+id:'rdl',
+name:'Kettlebell RDL',
+muscle:'Hamstrings · billen',
+letter:'RD',
+desc:'Duw je heupen naar achteren en houd spanning op je hamstrings.',
+sets:3,
+min:6,
+max:10,
+step:2
+},
+{
+id:'press',
+name:'Kettlebell overhead press',
+muscle:'Schouders · triceps',
+letter:'OP',
+desc:'Span buik en billen aan en druk gecontroleerd boven je hoofd.',
+sets:3,
+min:6,
+max:10,
+step:1
+},
+{
+id:'split_squat',
+name:'Bulgarian split squat',
+muscle:'Benen · billen',
+letter:'BS',
+desc:'Zak recht omlaag, houd balans en duw krachtig omhoog.',
+sets:3,
+min:6,
+max:10,
+step:1
+},
+{
+id:'ab_wheel',
+name:'Ab wheel rollout',
+muscle:'Core',
+letter:'AW',
+desc:'Houd je ribben omlaag en rol alleen zo ver uit als je romp stabiel blijft.',
+sets:3,
+min:6,
+max:12,
+step:0
+}
+];
+
+const typeNames={
+strength:'Kracht',
+mtb:'Mountainbike',
+run:'Hardlopen',
+squash:'Squash'
+};
+
+const typeLetters={
+strength:'K',
+mtb:'M',
+run:'R',
+squash:'S'
+};
+
+let db=loadDB();
+let currentScreen='home';
+let range='week';
+let calDate=new Date();
+
+let session=null;
+let timer=null;
+let timerLeft=90;
+let sessionStartedAt=null;
+
+
+function loadDB(){
+
+try{
+
+const d=JSON.parse(
+localStorage.getItem(KEY)||'null'
+);
+
+if(d){
+return d;
+}
+
+}catch(e){}
+
+return{
+profile:{
+name:'Louwe'
+},
+activities:[],
+strengthHistory:[],
+settings:{
+unit:'kg'
+}
+};
+
+}
+
+
+function saveDB(){
+
+localStorage.setItem(
+KEY,
+JSON.stringify(db)
+);
+
+}
+
+
+function uid(){
+
+return Date.now().toString(36)+
+Math.random().toString(36).slice(2,7);
+
+}
+
+
+function dateKey(d=new Date()){
+
+return d.toISOString().slice(0,10);
+
+}
+
+
+function fmtDate(s){
+
+const d=new Date(s+'T12:00:00');
+
+return d.toLocaleDateString(
+'nl-NL',
+{
+day:'numeric',
+month:'short'
+}
+);
+
+}
+
+
+function minutesFor(a){
+
+if(a.type==='strength'){
+return a.duration||45;
+}
+
+if(
+a.type==='mtb'||
+a.type==='run'||
+a.type==='squash'
+){
+return a.duration||0;
+}
+
+return 0;
+
+}
+
+
+function activityTitle(a){
+
+return typeNames[a.type]||a.type;
+
+}
+
+
+function go(screen){
+
+currentScreen=screen;
+
+document
+.querySelectorAll('.screen')
+.forEach(
+s=>s.classList.toggle(
+'active',
+s.id===screen
+)
+);
+
+document
+.querySelectorAll('.nav button')
+.forEach(
+b=>b.classList.toggle(
+'active',
+b.dataset.screen===screen
+)
+);
+
+document.getElementById('nav').style.display=
+screen==='strengthSession'
+?'none'
+:'grid';
+
+if(screen==='home'){
+renderHome();
+}
+
+if(screen==='workouts'){
+renderWorkouts();
+}
+
+if(screen==='calendar'){
+renderCalendar();
+}
+
+if(screen==='data'){
+renderData();
+}
+
+if(screen==='more'){
+renderMore();
+}
+
+window.scrollTo({
+top:0,
+behavior:'instant'
+});
+
+}
+
+
+function toast(msg){
+
+const t=document.getElementById('toast');
+
+t.textContent=msg;
+
+t.classList.add('show');
+
+clearTimeout(toast.t);
+
+toast.t=setTimeout(
+()=>t.classList.remove('show'),
+1800
+);
+
+}
+
+
+function openModal(html){
+
+document.getElementById('sheet').innerHTML=html;
+
+document
+.getElementById('modal')
+.classList.add('show');
+
+}
+
+
+function closeModal(){
+
+document
+.getElementById('modal')
+.classList.remove('show');
+
+}
+
+
+function esc(v){
+
+return String(v??'')
+.replace(
+/[&<>"']/g,
+m=>({
+'&':'&amp;',
+'<':'&lt;',
+'>':'&gt;',
+'"':'&quot;',
+"'":'&#39;'
+}[m])
+);
+
+}
+
+
+function startStrength(){
+
+session={
+index:0,
+
+sets:exercises.map(
+ex=>
+Array.from(
+{
+length:ex.sets
+},
+()=>({
+kg:'',
+reps:''
+})
+)
+)
+};
+
+sessionStartedAt=Date.now();
+
+go('strengthSession');
+
+renderSession();
+
+}
+
+
+function previousBest(id){
+
+const h=
+db.strengthHistory
+.filter(
+x=>x.exerciseId===id
+)
+.sort(
+(a,b)=>
+new Date(b.date)-
+new Date(a.date)
+);
+
+return h[0]||null;
+
+}
+
+
+function renderSession(){
+
+const ex=exercises[session.index];
+
+const best=previousBest(ex.id);
+
+document.getElementById(
+'sessionCounter'
+).textContent=
+`${session.index+1} / ${exercises.length}`;
+
+document.getElementById(
+'sessionProgress'
+).style.width=
+(
+session.index/
+exercises.length*
+100
+)+'%';
+
+document.getElementById(
+'exerciseLetter'
+).textContent=
+ex.letter;
+
+document.getElementById(
+'exerciseMuscle'
+).textContent=
+ex.muscle;
+
+document.getElementById(
+'exerciseName'
+).textContent=
+ex.name;
+
+document.getElementById(
+'exerciseDescription'
+).textContent=
+ex.desc;
+
+const rows=
+document.getElementById('setRows');
+
+rows.innerHTML='';
+
+for(
+let i=0;
+i<ex.sets;
+i++
+){
+
+const saved=
+session.sets[
+session.index
+][i];
+
+const suggested=
+best?.sets?.[i]?.kg||
+best?.suggestedKg||
+'';
+
+rows.insertAdjacentHTML(
+'beforeend',
+
+`<div class="set-row">
+
+<div class="set-no">
+${i+1}
+</div>
+
+<input
+class="input kg"
+inputmode="decimal"
+placeholder="${suggested||'kg'}"
+value="${esc(saved.kg)}"
+oninput="session.sets[${session.index}][${i}].kg=this.value"
+>
+
+<input
+class="input reps"
+inputmode="numeric"
+placeholder="${ex.min}-${ex.max}"
+value="${esc(saved.reps)}"
+oninput="session.sets[${session.index}][${i}].reps=this.value"
+>
+
+</div>`
+);
+
+}
+
+document.getElementById(
+'nextExerciseBtn'
+).textContent=
+session.index===
+exercises.length-1
+?'Workout afronden'
+:'Volgende oefening';
+
+resetTimer();
+
+}
+
+
+function nextExercise(){
+
+const ex=
+exercises[session.index];
+
+const rows=
+session.sets[session.index];
+
+const valid=
+rows.every(
+s=>Number(s.reps)>0
+);
+
+if(!valid){
+
+toast('Vul eerst je reps in');
+
+return;
+
+}
+
+if(
+session.index<
+exercises.length-1
+){
+
+session.index++;
+
+renderSession();
+
+return;
+
+}
+
+finishStrength();
+
+}
+
+
+function finishStrength(){
+
+let totalVol=0;
+let totalSets=0;
+
+session.sets.forEach(
+(sets,i)=>{
+
+const ex=exercises[i];
+
+const cleaned=
+sets.map(
+s=>({
+kg:Number(s.kg)||0,
+reps:Number(s.reps)||0
+})
+);
+
+totalSets+=
+cleaned.filter(
+s=>s.reps>0
+).length;
+
+const volume=
+cleaned.reduce(
+(sum,s)=>
+sum+s.kg*s.reps,
+0
+);
+
+totalVol+=volume;
+
+const valid=
+cleaned.filter(
+s=>s.reps>0
+);
+
+if(valid.length){
+
+const allTop=
+valid.length===ex.sets &&
+valid.every(
+s=>s.reps>=ex.max
+);
+
+const avgKg=
+valid.reduce(
+(x,s)=>x+s.kg,
+0
+)/
+valid.length;
+
+db.strengthHistory.push({
+
+id:uid(),
+
+date:new Date().toISOString(),
+
+exerciseId:ex.id,
+
+sets:cleaned,
+
+volume:volume,
+
+suggestedKg:
+allTop
+?
+Math.round(
+(avgKg+ex.step)*10
+)/10
+:
+avgKg
+
+});
+
+}
+
+}
+);
+
+db.activities.push({
+
+id:uid(),
+
+type:'strength',
+
+date:dateKey(),
+
+createdAt:new Date().toISOString(),
+
+duration:
+Math.max(
+1,
+Math.round(
+(Date.now()-sessionStartedAt)/
+60000
+)
+),
+
+sets:totalSets,
+
+volume:Math.round(totalVol)
+
+});
+
+saveDB();
+
+clearInterval(timer);
+
+timer=null;
+
+go('home');
+
+toast('Workout afgerond');
+
+}
+
+
+function resetTimer(){
+
+clearInterval(timer);
+
+timer=null;
+
+timerLeft=90;
+
+updateTimer();
+
+}
+
+
+function updateTimer(){
+
+document.getElementById(
+'timerText'
+).textContent=
+`${String(
+Math.floor(timerLeft/60)
+).padStart(2,'0')}:${String(
+timerLeft%60
+).padStart(2,'0')}`;
+
+}
+
+
+function toggleTimer(){
+
+const btn=
+document.querySelector(
+'.timer button'
+);
+
+if(timer){
+
+clearInterval(timer);
+
+timer=null;
+
+btn.textContent='Start timer';
+
+return;
+
+}
+
+btn.textContent='Pauze';
+
+timer=setInterval(
+()=>{
+
+timerLeft--;
+
+updateTimer();
+
+if(timerLeft<=0){
+
+clearInterval(timer);
+
+timer=null;
+
+btn.textContent='Start timer';
+
+toast('Rust voorbij');
+
+}
+
+},
+1000
+);
+
+}
+
+
+function openLog(type){
+
+let fields='';
+
+if(type==='mtb'){
+
+fields=`
+
+<div class="field">
+<label>Afstand (km)</label>
+<input id="f1"
+inputmode="decimal"
+placeholder="bijv. 32.5">
+</div>
+
+<div class="field">
+<label>Tijd (min)</label>
+<input id="f2"
+inputmode="numeric"
+placeholder="bijv. 105">
+</div>
+
+<div class="field">
+<label>Hoogtemeters (m)</label>
+<input id="f3"
+inputmode="numeric"
+placeholder="bijv. 420">
+</div>
+
+`;
+
+}
+
+else if(type==='run'){
+
+fields=`
+
+<div class="field">
+<label>Afstand (km)</label>
+<input id="f1"
+inputmode="decimal"
+placeholder="bijv. 10">
+</div>
+
+<div class="field">
+<label>Tijd (min)</label>
+<input id="f2"
+inputmode="numeric"
+placeholder="bijv. 52">
+</div>
+
+<div class="field">
+<label>Notitie</label>
+<textarea id="f3"
+placeholder="Hoe ging het?"></textarea>
+</div>
+
+`;
+
+}
+
+else{
+
+fields=`
+
+<div class="field">
+<label>Duur (min)</label>
+<input id="f1"
+inputmode="numeric"
+placeholder="bijv. 60">
+</div>
+
+<div class="field">
+<label>Notitie</label>
+<textarea id="f2"
+placeholder="Optioneel"></textarea>
+</div>
+
+`;
+
+}
+
+openModal(`
+
+<div class="sheet-head">
+
+<h2>
+${typeNames[type]}
+</h2>
+
+<button
+class="close"
+onclick="closeModal()">
+×
+</button>
+
+</div>
+
+<p style="
+color:#718086;
+font-size:12px
+">
+Voeg je sessie toe aan je centrale trainingsdata.
+</p>
+
+${fields}
+
+<div class="field">
+
+<label>Datum</label>
+
+<input
+id="fdate"
+type="date"
+value="${dateKey()}"
+>
+
+</div>
+
+<button
+class="primary-btn"
+onclick="saveActivity('${type}')">
+Opslaan
+</button>
+
+`);
+
+}
+
+
+function saveActivity(type){
+
+const d=
+document.getElementById(
+'fdate'
+).value||dateKey();
+
+let a={
+id:uid(),
+type,
+date:d,
+createdAt:new Date().toISOString()
+};
+
+if(type==='mtb'){
+
+a.km=
+Number(
+document.getElementById('f1').value
+)||0;
+
+a.duration=
+Number(
+document.getElementById('f2').value
+)||0;
+
+a.elevation=
+Number(
+document.getElementById('f3').value
+)||0;
+
+}
+
+if(type==='run'){
+
+a.km=
+Number(
+document.getElementById('f1').value
+)||0;
+
+a.duration=
+Number(
+document.getElementById('f2').value
+)||0;
+
+a.note=
+document.getElementById('f3').value||'';
+
+}
+
+if(type==='squash'){
+
+a.duration=
+Number(
+document.getElementById('f1').value
+)||0;
+
+a.note=
+document.getElementById('f2').value||'';
+
+}
+
+db.activities.push(a);
+
+saveDB();
+
+closeModal();
+
+go('home');
+
+toast(
+`${typeNames[type]} opgeslagen`
+);
+
+}
+
+
+function startOfWeek(d=new Date()){
+
+const x=new Date(d);
+
+const day=
+(x.getDay()+6)%7;
+
+x.setHours(0,0,0,0);
+
+x.setDate(
+x.getDate()-day
+);
+
+return x;
+
+}
+
+
+function inRange(date,mode){
+
+const d=
+new Date(date+'T12:00:00');
+
+const now=new Date();
+
+if(mode==='week'){
+
+return d>=startOfWeek(now);
+
+}
+
+if(mode==='month'){
+
+return d.getMonth()===
+now.getMonth()&&
+d.getFullYear()===
+now.getFullYear();
+
+}
+
+return true;
+
+}
+
+
+function filteredActivities(
+mode=range
+){
+
+return db.activities.filter(
+a=>inRange(a.date,mode)
+);
+
+}
+
+
+function renderHome(){
+
+const acts=
+filteredActivities('week');
+
+const strength=
+acts.filter(
+a=>a.type==='strength'
+).length;
+
+const km=
+acts.reduce(
+(s,a)=>s+(a.km||0),
+0
+);
+
+const mins=
+acts.reduce(
+(s,a)=>s+minutesFor(a),
+0
+);
+
+document.getElementById(
+'homeStats'
+).innerHTML=`
+
+<div class="stat">
+
+<div class="label">
+Sessies
+</div>
+
+<div class="value">
+${acts.length}
+</div>
+
+</div>
+
+<div class="stat">
+
+<div class="label">
+Km
+</div>
+
+<div class="value">
+${fmtNum(km)}
+</div>
+
+</div>
+
+<div class="stat">
+
+<div class="label">
+Minuten
+</div>
+
+<div class="value">
+${mins||0}
+</div>
+
+</div>
+
+`;
+
+let insight;
+
+if(strength===0){
+
+insight=
+'Je data is er nog niet. Een krachttraining vandaag geeft je eerste basis voor progressie.';
+
+}
+
+else if(strength>=2){
+
+insight=
+'Sterke week. Je hebt al meerdere krachtmomenten gepakt; kijk of herstel en progressie in balans blijven.';
+
+}
+
+else{
+
+insight=
+'Goede basis. Als je herstel goed voelt, is een tweede krachtmoment deze week een logische stap.';
+
+}
+
+const parts=
+insight.split('.');
+
+document.getElementById(
+'homeInsight'
+).innerHTML=`
+
+<div class="tag">
+Inzicht
+</div>
+
+<h3>
+${parts[0]}.
+</h3>
+
+<p>
+${parts.slice(1).join('.').trim()}
+</p>
+
+`;
+
+const recent=
+[...db.activities]
+.sort(
+(a,b)=>
+b.date.localeCompare(a.date)||
+String(b.createdAt)
+.localeCompare(
+String(a.createdAt)
+)
+)
+.slice(0,3);
+
+document.getElementById(
+'recentHome'
+).innerHTML=
+
+recent.length
+
+?
+
+`<div class="log-list">
+${recent.map(activityHTML).join('')}
+</div>`
+
+:
+
+`<div class="dark-card empty">
+
+<strong>
+Nog geen activiteiten
+</strong>
+
+Start met kracht of log een buitenactiviteit.
+
+</div>`;
+
+}
+
+
+function activityHTML(a){
+
+let detail='';
+
+if(a.type==='strength'){
+
+detail=
+`${a.sets||0} sets · ${a.volume||0} kg volume`;
+
+}
+
+if(a.type==='mtb'){
+
+detail=
+`${fmtNum(a.km)} km · ${a.duration||0} min · ${a.elevation||0} hm`;
+
+}
+
+if(a.type==='run'){
+
+detail=
+`${fmtNum(a.km)} km · ${a.duration||0} min`+
+(
+a.duration&&a.km
+?
+' · '+pace(a.km,a.duration)
+:''
+);
+
+}
+
+if(a.type==='squash'){
+
+detail=
+`${a.duration||0} min`+
+(
+a.note
+?
+' · '+esc(a.note)
+:''
+);
+
+}
+
+return `
+
+<div class="log-item">
+
+<div>
+
+<h4>
+${activityTitle(a)}
+</h4>
+
+<p>
+${fmtDate(a.date)} · ${detail}
+</p>
+
+</div>
+
+<div class="log-type">
+${typeLetters[a.type]}
+</div>
+
+</div>
+
+`;
+
+}
+
+
+function fmtNum(n){
+
+return Number(n||0)
+.toLocaleString(
+'nl-NL',
+{
+maximumFractionDigits:1
+}
+);
+
+}
+
+
+function pace(km,min){
+
+if(!km)return'—';
+
+const sec=
+Math.round(
+min*60/km
+);
+
+return `${Math.floor(sec/60)}:${String(
+sec%60
+).padStart(2,'0')}/km`;
+
+}
+
+
+function renderWorkouts(){
+
+document.getElementById(
+'exercisePreview'
+).innerHTML=
+
+exercises.map(
+(e,i)=>`
+
+<div class="exercise-row">
+
+<div class="exercise-index">
+${String(i+1).padStart(2,'0')}
+</div>
+
+<div>
+
+<h4>
+${e.name}
+</h4>
+
+<p>
+${e.sets} sets ·
+${e.min}–${e.max} reps ·
+${e.muscle}
+</p>
+
+</div>
+
+</div>
+
+`
+).join('');
+
+const done=
+db.activities.filter(
+a=>a.type==='strength'
+).length;
+
+const hist=
+db.strengthHistory.length;
+
+document.getElementById(
+'progressSummary'
+).innerHTML=`
+
+<div style="
+font-size:11px;
+color:#7f9096;
+text-transform:uppercase;
+letter-spacing:.1em;
+font-weight:850
+">
+Basis
+</div>
+
+<div style="
+font-size:24px;
+font-weight:900;
+letter-spacing:-.05em;
+margin-top:5px
+">
+${done} krachtworkouts
+</div>
+
+<p style="
+font-size:12px;
+color:#a5b1b4;
+line-height:1.45;
+margin-bottom:0
+">
+
+${
+hist
+
+?
+
+`Er zijn ${hist} oefenresultaten opgeslagen.
+Bij volledige sets aan de bovenkant van de rep-range
+wordt je volgende doel automatisch verhoogd.`
+
+:
+
+'Je eerste workout legt je startwaarden vast.
+Daarna bouwt de app je progressie per oefening op.'
+}
+
+</p>
+
+`;
+
+}
+
+
+function changeMonth(delta){
+
+calDate=
+new Date(
+calDate.getFullYear(),
+calDate.getMonth()+delta,
+1
+);
+
+renderCalendar();
+
+}
+
+
+function renderCalendar(){
+
+const y=calDate.getFullYear();
+const m=calDate.getMonth();
+
+document.getElementById(
+'monthTitle'
+).textContent=
+
+new Date(y,m,1)
+.toLocaleDateString(
+'nl-NL',
+{
+month:'long',
+year:'numeric'
+}
+);
+
+const first=
+new Date(y,m,1);
+
+const start=
+(first.getDay()+6)%7;
+
+const daysIn=
+new Date(y,m+1,0)
+.getDate();
+
+const prevDays=
+new Date(y,m,0)
+.getDate();
+
+const grid=
+document.getElementById(
+'calendarDays'
+);
+
+grid.innerHTML='';
+
+for(
+let i=0;
+i<42;
+i++
+){
+
+const n=
+i-start+1;
+
+let day=n;
+let mm=m;
+let yy=y;
+let muted=false;
+
+if(n<1){
+
+day=prevDays+n;
+mm--;
+
+muted=true;
+
+if(mm<0){
+
+mm=11;
+yy--;
+
+}
+
+}
+
+if(n>daysIn){
+
+day=n-daysIn;
+mm++;
+
+muted=true;
+
+if(mm>11){
+
+mm=0;
+yy++;
+
+}
+
+}
+
+const key=
+`${yy}-${String(mm+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+
+const acts=
+db.activities.filter(
+a=>a.date===key
+);
+
+const dots=
+acts.map(
+a=>
+`<i class="dot ${
+a.type==='strength'
+?'s'
+:a.type==='mtb'
+?'m'
+:a.type==='run'
+?'r'
+:'x'
+}"></i>`
+).join('');
+
+grid.insertAdjacentHTML(
+'beforeend',
+
+`<button
+class="day ${
+muted?'muted':''
+} ${
+key===dateKey()?'today':''
+}"
+onclick="showDay('${key}')">
+
+<span class="n">
+${day}
+</span>
+
+<span class="dots">
+${dots}
+</span>
+
+</button>`
+);
+
+}
+
+const monthActs=
+db.activities
+.filter(
+a=>{
+const d=
+new Date(a.date+'T12:00:00');
+
+return d.getMonth()===m&&
+d.getFullYear()===y;
+}
+)
+.sort(
+(a,b)=>
+b.date.localeCompare(a.date)
+);
+
+document.getElementById(
+'calendarList'
+).innerHTML=
+
+monthActs.length
+
+?
+
+monthActs.map(
+activityHTML
+).join('')
+
+:
+
+`<div class="dark-card empty">
+
+<strong>
+Geen activiteiten
+</strong>
+
+Deze maand staat nog leeg.
+
+</div>`;
+
+}
+
+
+function showDay(key){
+
+const acts=
+db.activities.filter(
+a=>a.date===key
+);
+
+openModal(`
+
+<div class="sheet-head">
+
+<h2>
+${fmtDate(key)}
+</h2>
+
+<button
+class="close"
+onclick="closeModal()">
+×
+</button>
+
+</div>
+
+${
+acts.length
+
+?
+
+`<div class="log-list">
+${acts.map(activityHTML).join('')}
+</div>`
+
+:
+
+`<div class="empty"
+style="color:#6e7b80">
+
+<strong>
+Geen activiteit
+</strong>
+
+Er staat niets geregistreerd op deze dag.
+
+</div>`
+}
+
+`);
+
+}
+
+
+function setRange(r,el){
+
+range=r;
+
+document
+.querySelectorAll('.tab')
+.forEach(
+x=>x.classList.remove('active')
+);
+
+el.classList.add('active');
+
+renderData();
+
+}
+
+
+function renderData(){
+
+const acts=
+filteredActivities(range);
+
+const strength=
+acts.filter(
+a=>a.type==='strength'
+);
+
+const mtb=
+acts.filter(
+a=>a.type==='mtb'
+);
+
+const run=
+acts.filter(
+a=>a.type==='run'
+);
+
+const squash=
+acts.filter(
+a=>a.type==='squash'
+);
+
+const km=
+acts.reduce(
+(s,a)=>s+(a.km||0),
+0
+);
+
+const mins=
+acts.reduce(
+(s,a)=>s+minutesFor(a),
+0
+);
+
+document.getElementById(
+'dataMetrics'
+).innerHTML=`
+
+<div class="metric-card">
+<small>Sessies</small>
+<strong>${acts.length}</strong>
+</div>
+
+<div class="metric-card">
+<small>Kracht</small>
+<strong>${strength.length}</strong>
+</div>
+
+<div class="metric-card">
+<small>Afstand</small>
+<strong>${fmtNum(km)} km</strong>
+</div>
+
+<div class="metric-card">
+<small>Tijd</small>
+<strong>${mins} min</strong>
+</div>
+
+`;
+
+renderChart(acts);
+
+const total=acts.length||1;
+
+document.getElementById(
+'distribution'
+).innerHTML=
+
+`<div style="
+font-size:11px;
+color:#829197;
+text-transform:uppercase;
+letter-spacing:.1em;
+font-weight:850
+">
+Sportverdeling
+</div>`
+
++
+
+[
+['Kracht',strength.length],
+['Mountainbike',mtb.length],
+['Hardlopen',run.length],
+['Squash',squash.length]
+]
+.map(
+x=>`
+
+<div class="dist-row">
+
+<div class="dist-top">
+
+<span>
+${x[0]}
+</span>
+
+<span>
+${Math.round(x[1]/total*100)}%
+</span>
+
+</div>
+
+<div class="dist-track">
+
+<i style="
+width:${x[1]/total*100}%
+"></i>
+
+</div>
+
+</div>
+
+`
+)
+.join('');
+
+const volume=
+strength.reduce(
+(s,a)=>s+(a.volume||0),
+0
+);
+
+const bests=
+exercises
+.map(
+e=>({
+e,
+b:previousBest(e.id)
+})
+)
+.filter(
+x=>x.b
+);
+
+document.getElementById(
+'strengthData'
+).innerHTML=`
+
+<div style="
+display:flex;
+justify-content:space-between;
+gap:10px
+">
+
+<div>
+
+<div style="
+font-size:10px;
+color:#829197;
+text-transform:uppercase;
+letter-spacing:.1em;
+font-weight:850
+">
+Volume
+</div>
+
+<div style="
+font-size:25px;
+font-weight:900;
+letter-spacing:-.05em;
+margin-top:4px
+">
+${Math.round(volume).toLocaleString('nl-NL')} kg
+</div>
+
+</div>
+
+<div style="text-align:right">
+
+<div style="
+font-size:10px;
+color:#829197;
+text-transform:uppercase;
+letter-spacing:.1em;
+font-weight:850
+">
+Oefeningen
+</div>
+
+<div style="
+font-size:25px;
+font-weight:900;
+letter-spacing:-.05em;
+margin-top:4px
+">
+${bests.length}
+</div>
+
+</div>
+
+</div>
+
+${
+bests.length
+
+?
+
+`<div style="
+margin-top:14px;
+display:grid;
+gap:8px
+">
+
+${bests.slice(0,5).map(
+x=>{
+
+const top=
+Math.max(
+...x.b.sets.map(
+s=>Number(s.kg)||0
+)
+);
+
+return `
+
+<div style="
+display:flex;
+justify-content:space-between;
+border-top:1px solid var(--line);
+padding-top:9px;
+font-size:12px
+">
+
+<span>
+${x.e.name}
+</span>
+
+<strong>
+${fmtNum(top)} kg
+</strong>
+
+</div>
+
+`;
+
+}
+).join('')}
+
+</div>`
+
+:
+
+`<p style="
+font-size:12px;
+color:#a5b1b4;
+line-height:1.45
+">
+Na je eerste krachtworkout verschijnen hier
+je echte trainingsgewichten en progressie.
+</p>`
+
+}
+
+`;
+
+}
+
+
+function renderChart(acts){
+
+const now=new Date();
+const bars=[];
+
+if(range==='week'){
+
+const start=
+startOfWeek(now);
+
+for(
+let i=0;
+i<7;
+i++
+){
+
+const d=
+new Date(start);
+
+d.setDate(
+d.getDate()+i
+);
+
+const key=
+dateKey(d);
+
+bars.push({
+label:['M','D','W','D','V','Z','Z'][i],
+v:acts.filter(
+a=>a.date===key
+).length
+});
+
+}
+
+}
+
+else{
+
+const weeks=
+range==='month'
+?5
+:8;
+
+for(
+let i=weeks-1;
+i>=0;
+i--
+){
+
+const end=
+new Date(now);
+
+end.setDate(
+end.getDate()-i*7
+);
+
+const start=
+new Date(end);
+
+start.setDate(
+start.getDate()-6
+);
+
+const v=
+acts.filter(
+a=>{
+
+const d=
+new Date(
+a.date+'T12:00:00'
+);
+
+return d>=
+new Date(start.toDateString())&&
+d<=
+new Date(end.toDateString());
+
+}
+).length;
+
+bars.push({
+label:i===0?'Nu':`-${i}w`,
+v
+});
+
+}
+
+}
+
+const max=
+Math.max(
+1,
+...bars.map(
+x=>x.v
+)
+);
+
+document.getElementById(
+'activityChart'
+).innerHTML=
+
+bars.map(
+x=>`
+
+<div class="bar-wrap">
+
+<div
+class="bar"
+style="height:${Math.max(
+4,
+x.v/max*100
+)}%">
+</div>
+
+<div class="bar-label">
+${x.label}
+</div>
+
+</div>
+
+`
+).join('');
+
+}
+
+
+function renderMore(){
+
+document.getElementById(
+'settingsArea'
+).innerHTML='';
+
+}
+
+
+function showSettings(){
+
+const p=
+db.profile||{};
+
+document.getElementById(
+'settingsArea'
+).innerHTML=`
+
+<div class="form-card">
+
+<div style="
+font-size:18px;
+font-weight:900;
+letter-spacing:-.04em
+">
+Instellingen
+</div>
+
+<div class="field">
+
+<label>Naam</label>
+
+<input
+id="profileName"
+value="${esc(p.name||'Louwe')}"
+>
+
+</div>
+
+<button
+class="primary-btn"
+onclick="saveSettings()">
+Opslaan
+</button>
+
+<button
+class="secondary-btn"
+style="width:100%;margin-top:9px"
+onclick="importPrompt()">
+Data importeren
+</button>
+
+<button
+class="secondary-btn"
+style="width:100%;margin-top:9px"
+onclick="resetAll()">
+Alle data wissen
+</button>
+
+</div>
+
+`;
+
+}
+
+
+function saveSettings(){
+
+db.profile.name=
+document.getElementById(
+'profileName'
+).value||'Louwe';
+
+saveDB();
+
+toast(
+'Instellingen opgeslagen'
+);
+
+}
+
+
+function exportData(){
+
+const blob=
+new Blob(
+[
+JSON.stringify(
+db,
+null,
+2
+)
+],
+{
+type:'application/json'
+}
+);
+
+const url=
+URL.createObjectURL(blob);
+
+const a=
+document.createElement('a');
+
+a.href=url;
+
+a.download=
+'louwe-fitness-backup.json';
+
+a.click();
+
+URL.revokeObjectURL(url);
+
+toast(
+'Back-up gemaakt'
+);
+
+}
+
+
+function importPrompt(){
+
+const input=
+document.createElement('input');
+
+input.type='file';
+
+input.accept=
+'.json,application/json';
+
+input.onchange=()=>{
+
+const f=input.files[0];
+
+if(!f)return;
+
+const r=
+new FileReader();
+
+r.onload=()=>{
+
+try{
+
+const x=
+JSON.parse(r.result);
+
+if(
+!x.activities||
+!x.strengthHistory
+){
+throw 0;
+}
+
+db=x;
+
+saveDB();
+
+renderMore();
+
+toast(
+'Data geïmporteerd'
+);
+
+}
+catch(e){
+
+toast(
+'Ongeldig back-upbestand'
+);
+
+}
+
+};
+
+r.readAsText(f);
+
+};
+
+input.click();
+
+}
+
+
+function resetAll(){
+
+if(
+confirm(
+'Alle Louwe Fitness-data wissen?'
+)
+){
+
+localStorage.removeItem(KEY);
+
+db=loadDB();
+
+renderMore();
+
+go('home');
+
+toast(
+'Data gewist'
+);
+
+}
+
+}
+
+
+function renderAll(){
+
+renderHome();
+renderWorkouts();
+renderCalendar();
+renderData();
+renderMore();
+
+}
+
+renderAll();
+ </script>
+
+</body>
+</html>
