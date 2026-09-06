@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#071219">
+<title>Louwe Fitness</title>
+<style>
+:root{
+ --bg:#071219;--panel:#101c24;--panel2:#16242d;--white:#fff;--muted:#9ba7ad;
+ --green:#35d27b;--green2:#20b96a;--line:rgba(255,255,255,.08);--r:18px
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:#02070a;color:var(--white);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+body{min-height:100vh}
+.app{width:min(100%,520px);margin:auto;min-height:100vh;background:#071219;padding-bottom:100px}
+header{padding:20px 20px 0}
+.top{display:flex;justify-content:space-between;align-items:center}
+.brand{font-size:21px;font-weight:800;letter-spacing:-.045em}
+.gear{font-size:19px;color:#dce2e5}
+.hero{
+height:230px;margin:16px -20px 0;padding:28px 20px;position:relative;overflow:hidden;
+border-radius:0 0 30px 30px;
+background:linear-gradient(180deg,rgba(5,15,20,.12),rgba(5,15,20,.82)),
+url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85") center/cover
+}
+.hero:after{content:"";position:absolute;inset:auto 0 0;height:80px;background:linear-gradient(transparent,#071219)}
+.hero h1,.hero p{position:relative;z-index:2}
+.hero h1{font-size:31px;line-height:1;margin:0;letter-spacing:-.05em;font-weight:800}
+.hero p{margin:8px 0;color:#d4dadd;font-size:14px}
+main{padding:0 20px}
+.label{font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#89969c;margin:24px 0 9px}
+.section-title{font-size:25px;font-weight:800;letter-spacing:-.045em;margin-bottom:12px}
+.today{background:#fff;color:#111;border-radius:21px;padding:17px;box-shadow:0 8px 30px rgba(0,0,0,.16)}
+.today .ey{font-size:10px;color:#6e777c;font-weight:800;letter-spacing:.1em}
+.today h2{margin:4px 0 9px;font-size:22px;letter-spacing:-.03em}
+.today .meta{font-size:12px;color:#667077;display:flex;gap:13px;flex-wrap:wrap}
+.cta{display:block;background:var(--green);color:#06130b;text-align:center;font-weight:800;border-radius:13px;padding:13px;margin-top:14px;text-decoration:none}
+.start-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.start-card{
+position:relative;min-height:164px;border:1px solid rgba(255,255,255,.07);
+border-radius:20px;padding:18px;text-align:left;overflow:hidden;color:#fff;
+background:#101c24;display:flex;flex-direction:column;justify-content:flex-end;
+box-shadow:0 8px 28px rgba(0,0,0,.14)
+}
+.start-card:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 28%,rgba(0,0,0,.72) 100%)}
+.start-card.strength{background:linear-gradient(145deg,#1b2a25,#10181c)}
+.start-card.ride{background:linear-gradient(145deg,#182b2e,#0d181d)}
+.start-card.run{background:linear-gradient(145deg,#20272a,#10181d)}
+.start-card>*{position:relative;z-index:1}
+.start-card .start-kicker{font-size:9px;letter-spacing:.16em;font-weight:800;color:#aeb8bc;margin-bottom:auto}
+.start-card strong{font-size:20px;letter-spacing:-.035em;margin-bottom:3px}
+.start-card span:not(.start-kicker){font-size:11px;color:#aeb8bc}
+.start-card i{position:absolute;right:16px;bottom:16px;font-style:normal;font-size:20px}
+.other-activity{
+width:100%;margin-top:10px;border:1px solid rgba(255,255,255,.07);
+background:#101c24;color:#fff;border-radius:16px;padding:14px 16px;
+display:flex;justify-content:space-between;font-size:12px
+}
+.other-activity span{color:#8e9a9f}.other-activity b{font-weight:700}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.stat{background:#101c24;border:1px solid rgba(255,255,255,.05);border-radius:17px;padding:15px 10px;text-align:center}
+.stat b{font-size:23px;display:block}.stat span{font-size:10px;color:var(--muted)}
+.activity{background:#101c24;border-radius:16px;padding:12px;display:flex;align-items:center;gap:11px}
+.check{width:28px;height:28px;border-radius:50%;background:var(--green);color:#06200f;display:grid;place-items:center;font-weight:900}
+.activity strong{font-size:13px}.activity small{display:block;color:var(--muted);margin-top:3px}.chev{margin-left:auto;color:#c5cdd0}
+.insight{margin-top:10px;background:linear-gradient(135deg,#10221a,#0e1b22);border:1px solid rgba(54,212,124,.14);border-radius:19px;padding:15px}
+.insight .tag{font-size:8px;letter-spacing:.16em;color:var(--green);font-weight:800}
+.insight strong{display:block;margin-top:7px;font-size:15px}
+.insight p{margin:4px 0 0;color:#9eaaaf;font-size:11px;line-height:1.45}
+
+.screen{display:none}.screen.active{display:block}
+.screen main{padding-top:4px}
+.titlebar{display:flex;justify-content:space-between;align-items:center;padding:25px 0 13px}
+.titlebar h1{margin:0;font-size:29px;letter-spacing:-.05em}.plus{font-size:25px}
+.segment{display:flex;gap:6px;overflow:auto;padding-bottom:14px}
+.seg{white-space:nowrap;background:#101d26;border:1px solid rgba(255,255,255,.08);color:#c4cdd1;border-radius:999px;padding:9px 14px;font-size:11px}
+.seg.on{background:var(--green);color:#06200f;font-weight:800;box-shadow:0 4px 14px rgba(54,212,124,.16)}
+.list{background:#f8f8f7;color:#111;border-radius:20px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.14)}
+.work{display:flex;align-items:center;padding:11px;border-bottom:1px solid #e2e2df;gap:11px}.work:last-child{border:0}
+.thumb{width:61px;height:61px;border-radius:13px;display:grid;place-items:center;font-size:27px;background:linear-gradient(145deg,#d5d7d4,#888d8a)}
+.work h3{margin:0 0 4px;font-size:14px}.work p{margin:0;font-size:11px;color:#747b7d}.work .chev{color:#111}
+.whitecard{background:#f8f8f7;color:#111;border-radius:20px;padding:15px;box-shadow:0 12px 30px rgba(0,0,0,.12)}
+.whitecard h2{margin:0 0 4px;font-size:19px}.whitecard p{color:#6f777a;font-size:12px;margin:0}
+.field{background:#fff;border:1px solid #e0e0dc;border-radius:13px;padding:11px;color:#111}
+.field label{display:block;font-size:9px;font-weight:800;color:#777;margin-bottom:5px;letter-spacing:.1em}
+.field input{border:0;outline:0;width:100%;font-size:16px;background:transparent}
+.calendar{background:#f8f8f7;color:#111;border-radius:20px;padding:14px;box-shadow:0 12px 30px rgba(0,0,0,.14)}
+.month{display:flex;justify-content:space-between;font-weight:800;margin-bottom:13px}
+.days,.nums{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;gap:7px}
+.days{font-size:9px;color:#7c8385}.nums{font-size:12px}
+.day{height:27px;display:grid;place-items:center;border-radius:50%}.day.green{background:var(--green);font-weight:800}
+.chart{background:#101d26;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:16px;box-shadow:0 12px 35px rgba(0,0,0,.15)}
+.charthead{display:flex;justify-content:space-between;align-items:end}.charthead b{font-size:15px}.charthead span{font-size:11px;color:var(--green)}
+.bars{height:160px;display:flex;align-items:end;gap:8px;padding-top:18px}
+.barw{height:100%;flex:1;display:flex;flex-direction:column;justify-content:end;align-items:center;gap:7px}
+.bar{width:100%;max-width:25px;background:var(--green);border-radius:6px 6px 2px 2px;box-shadow:0 4px 12px rgba(54,212,124,.13)}
+.barw small{font-size:9px;color:#7f8a8f}
+.data-hero{background:linear-gradient(135deg,#13241d,#101c24);border:1px solid rgba(54,212,124,.13);border-radius:21px;padding:18px}
+.data-hero .big{font-size:38px;font-weight:850;letter-spacing:-.06em}.data-hero small{color:#89969c}.trend{color:var(--green);font-size:11px;font-weight:750}
+.metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}
+.metric{background:#101d26;border:1px solid rgba(255,255,255,.08);border-radius:17px;padding:14px}
+.metric b{font-size:21px}.metric small{display:block;color:#819097;font-size:10px;margin-top:3px}
+.data-section{margin-top:18px}.row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #e0e0dc}
+.row:last-child{border:0}.row small{color:#747b7d}
+
+.workout{background:#f8f8f7;color:#111;border-radius:20px;padding:14px;box-shadow:0 12px 32px rgba(0,0,0,.18)}
+.exercise-img{height:230px;border-radius:15px;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.25),transparent 25%),linear-gradient(135deg,#d9dedb,#8d9792);display:grid;place-items:center;font-size:74px;margin-bottom:13px;position:relative;overflow:hidden}
+.exercise-mark{background:rgba(255,255,255,.38);backdrop-filter:blur(8px);font-size:39px;font-weight:900;letter-spacing:-.08em;color:#27332f;border:3px solid rgba(39,51,47,.2);padding:12px 15px;border-radius:18px}
+.media-caption{position:absolute;left:12px;bottom:10px;font-size:8px;letter-spacing:.14em;font-weight:800;color:#27332f;background:rgba(255,255,255,.5);padding:6px 8px;border-radius:8px}
+.exercise-top{display:flex;justify-content:space-between;align-items:center}.exercise-top span{font-size:11px;color:#6d7578}
+.workout h2{font-size:24px;margin:7px 0 3px}.sets{margin-top:13px;border-top:1px solid #ddd}
+.set{display:grid;grid-template-columns:34px 1fr 1fr 30px;gap:8px;align-items:center;padding:12px 0;border-bottom:1px solid #ddd;font-size:12px}
+.set input{width:100%;border:1px solid #ddd;border-radius:8px;padding:9px;background:#fff;font-size:13px}
+.ok{width:22px;height:22px;border-radius:50%;border:1px solid #aeb5b7;background:white}.ok.done{background:var(--green);border-color:var(--green)}
+.next{width:100%;border:0;background:var(--green);color:#05200e;font-weight:800;padding:14px;border-radius:13px;margin-top:13px}
+.rest{margin-top:10px;background:#16242d;color:white;border:1px solid rgba(255,255,255,.08);border-radius:15px;padding:14px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 10px 24px rgba(0,0,0,.18)}
+.rest b{font-size:24px}.rest button{border:0;border-radius:10px;padding:9px 12px;font-weight:800}
+
+.start-grid .start-card,.sport,.today,.work,.whitecard,.calendar,.workout,.chart,.data-hero,.metric,.activity,.insight,.stat{transition:transform .15s ease,box-shadow .15s ease}
+button{font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:active{transform:scale(.985)}
+
+.premium-nav{
+position:fixed;z-index:20;bottom:13px;left:50%;transform:translateX(-50%);
+width:calc(min(100%,520px) - 24px);height:72px;
+background:rgba(15,27,35,.96);border:0!important;outline:0!important;
+border-radius:24px;box-shadow:0 14px 40px rgba(0,0,0,.35);
+display:grid;grid-template-columns:repeat(5,1fr);padding:7px 6px;
+backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+-webkit-appearance:none;appearance:none
+}
+.premium-nav button,.premium-nav button:focus,.premium-nav button:active{
+background:transparent;border:0!important;outline:0!important;box-shadow:none!important;
+-webkit-appearance:none;appearance:none;color:#718087;border-radius:15px;
+display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px
+}
+.premium-nav button.active{color:#fff;background:rgba(255,255,255,.055)}
+.premium-nav button.active:after{content:"";position:absolute;bottom:5px;width:20px;height:2px;border-radius:2px;background:#35d27b}
+.premium-nav small{font-size:9px;font-weight:700}
+.navicon{display:block;width:18px;height:18px;position:relative;opacity:.9}
+.homeicon:before{content:"";position:absolute;left:3px;top:6px;width:11px;height:9px;border:1.8px solid currentColor;border-top:0;border-radius:2px}
+.homeicon:after{content:"";position:absolute;left:4px;top:2px;width:9px;height:9px;border-left:1.8px solid currentColor;border-top:1.8px solid currentColor;transform:rotate(45deg)}
+.dumbbell:before,.dumbbell:after{content:"";position:absolute;top:7px;width:5px;height:4px;border:1.7px solid currentColor;border-radius:1px}
+.dumbbell:before{left:0}.dumbbell:after{right:0}.dumbbell{border-top:1.8px solid currentColor;margin-top:1px}
+.calendaricon{border:1.7px solid currentColor;border-radius:3px}
+.calendaricon:before{content:"";position:absolute;left:3px;right:3px;top:5px;border-top:1.5px solid currentColor}
+.calendaricon:after{content:"";position:absolute;left:4px;top:-3px;width:2px;height:5px;background:currentColor;box-shadow:7px 0 currentColor}
+.charticon:before{content:"";position:absolute;left:2px;bottom:2px;width:3px;height:7px;background:currentColor;border-radius:2px;box-shadow:5px -4px currentColor,10px -9px currentColor}
+.charticon:after{content:"";position:absolute;left:1px;right:0;bottom:0;border-bottom:1.5px solid currentColor}
+.moreicon:before{content:"•••";position:absolute;left:0;top:-3px;font-size:17px;letter-spacing:2px}
+.toast{position:fixed;z-index:30;left:50%;bottom:100px;transform:translate(-50%,15px);opacity:0;background:#fff;color:#111;padding:11px 15px;border-radius:12px;font-size:12px;font-weight:700;transition:.2s;box-shadow:0 12px 35px rgba(0,0,0,.3)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(min-width:600px){
+body{padding:20px}.app{border-radius:28px;overflow:hidden;box-shadow:0 20px 80px rgba(0,0,0,.35)}
+.premium-nav{bottom:32px}
+}
+@media(max-width:370px){.start-card{min-height:155px}.hero{height:220px}.hero h1{font-size:30px}}
+</style>
+</head>
+<body>
+<div class="app">
+
+<section id="home" class="screen active">
+<header>
+<div class="top"><div class="brand">Louwe Fitness</div><div class="gear">•••</div></div>
+<div class="hero"><h1>Goedemorgen!</h1><p>Klaar voor een sterke dag?</p></div>
+</header>
+<main>
+<div class="label">Vandaag</div>
+<div class="today">
+<div class="ey">JOUW KEUZE</div>
+<h2>Kies wat je gaat doen</h2>
+<div class="meta">Kracht &nbsp;&nbsp; Mountainbike &nbsp;&nbsp; Hardlopen &nbsp;&nbsp; Squash</div>
+<a class="cta" onclick="show('choose')">Activiteit kiezen →</a>
+</div>
+
+<div class="label">Start direct</div>
+<div class="start-grid">
+<button class="start-card strength" onclick="show('train')">
+<span class="start-kicker">STRENGTH</span><strong>Kracht</strong><span>Train sterker</span><i>→</i>
+</button>
+<button class="start-card ride" onclick="show('ride')">
+<span class="start-kicker">OUTDOOR</span><strong>Mountainbike</strong><span>Start een rit</span><i>→</i>
+</button>
+<button class="start-card run" onclick="show('logrun')">
+<span class="start-kicker">RUN</span><strong>Hardlopen</strong><span>Start een run</span><i>→</i>
+</button>
+</div>
+<button class="other-activity" onclick="show('logsquash')"><span>Andere activiteit</span><b>Squash&nbsp;&nbsp;→</b></button>
+
+<div class="insight"><div class="tag">LOUWE INSIGHT</div><strong>Jij kiest de sport. Louwe bewaart het overzicht.</strong><p>Kracht, MTB, hardlopen en squash komen samen in één persoonlijk sportlogboek.</p></div>
+
+<div class="label">Deze week</div>
+<div class="stats">
+<div class="stat"><b id="weekCount">0</b><span>Sessies</span></div>
+<div class="stat"><b id="weekMin">—</b><span>Minuten</span></div>
+<div class="stat"><b id="weekPR">0</b><span>PR's</span></div>
+</div>
+
+<div class="label">Recente activiteit</div>
+<div id="recent" class="activity"><div class="check">+</div><div><strong>Nog geen activiteit</strong><small>Je data verschijnt hier.</small></div><span class="chev">›</span></div>
+</main>
+</section>
+
+<section id="choose" class="screen">
+<main>
+<div class="titlebar"><h1>Wat ga je doen?</h1></div>
+<div class="activity-grid">
+<button class="sport" onclick="show('train')"><div class="icon">K</div><h3>Kracht</h3><p>Build strength</p></button>
+<button class="sport" onclick="show('ride')"><div class="icon">M</div><h3>Mountainbike</h3><p>Go ride</p></button>
+<button class="sport" onclick="show('logrun')"><div class="icon">R</div><h3>Hardlopen</h3><p>Go run</p></button>
+<button class="sport" onclick="show('logsquash')"><div class="icon">S</div><h3>Squash</h3><p>Log session</p></button>
+</div>
+</main>
+</section>
+
+<section id="train" class="screen">
+<main>
+<div class="titlebar"><h1>Workouts</h1><span class="plus">＋</span></div>
+<div class="segment"><span class="seg on">Mijn schema</span><span class="seg">Alle workouts</span><span class="seg">Favorieten</span></div>
+<div class="list">
+<div class="work" onclick="startWorkout('Full Body A')"><div class="thumb">K</div><div><h3>Full Body A</h3><p>Kracht · 7 oefeningen · ±45 min</p></div><span class="chev">›</span></div>
+<div class="work" onclick="startWorkout('Full Body B')"><div class="thumb">B</div><div><h3>Full Body B</h3><p>Kracht · 7 oefeningen · ±45 min</p></div><span class="chev">›</span></div>
+<div class="work"><div class="thumb">P</div><div><h3>Upper Body</h3><p>Bovenlichaam · 6 oefeningen · ±40 min</p></div><span class="chev">›</span></div>
+<div class="work"><div class="thumb">L</div><div><h3>Lower Body</h3><p>Onderlichaam · 6 oefeningen · ±40 min</p></div><span class="chev">›</span></div>
+<div class="work"><div class="thumb">C</div><div><h3>Core</h3><p>Buik · 5 oefeningen · ±20 min</p></div><span class="chev">›</span></div>
+</div>
+</main>
+</section>
+
+<section id="workout" class="screen">
+<main>
+<div class="titlebar"><span onclick="show('train')">‹</span><h1 id="wname">Full Body A</h1><span style="color:#ff6969;font-size:12px">Stoppen</span></div>
+<div class="workout">
+<div class="exercise-top"><span id="eno">1 van 7</span><span>★</span></div>
+<div class="exercise-img" id="eart"><span class="exercise-mark">GS</span><div class="media-caption">TECHNIQUE · CONTROL</div></div>
+<h2 id="ename">Goblet Squat</h2>
+<p id="emeta">Onderlichaam · 4 sets · 6–8 reps</p>
+<div class="sets" id="sets"></div>
+<button class="next" onclick="nextSet()">Volgende set →</button>
+</div>
+<div class="rest"><div><small>Rustpauze</small><br><b id="clock">02:00</b></div><button onclick="timer()">Start</button></div>
+</main>
+</section>
+
+<section id="ride" class="screen">
+<main>
+<div class="titlebar"><h1>Mountainbike</h1></div>
+<div class="whitecard">
+<h2>Nieuwe rit</h2><p>Leg je rit vast. Later kunnen we GPX en route-data toevoegen.</p>
+<div class="activity-grid" style="margin-top:13px">
+<div class="field"><label>KM</label><input id="rkm" type="number" step=".1" placeholder="28.4"></div>
+<div class="field"><label>Hoogtemeters</label><input id="rhm" type="number" placeholder="320"></div>
+</div>
+<div class="field" style="margin-top:9px"><label>Route</label><input id="route" placeholder="Bentwoud"></div>
+<button class="cta" onclick="save('mtb')">Rit opslaan</button>
+</div>
+</main>
+</section>
+
+<section id="logrun" class="screen">
+<main>
+<div class="titlebar"><h1>Hardlopen</h1></div>
+<div class="whitecard">
+<h2>Nieuwe run</h2><p>Afstand en tijd zijn genoeg om te beginnen.</p>
+<div class="field" style="margin-top:13px"><label>Afstand · km</label><input id="run" type="number" step=".1" placeholder="5.0"></div>
+<div class="field" style="margin-top:9px"><label>Tijd</label><input id="runtime" placeholder="28:30"></div>
+<button class="cta" onclick="save('run')">Run opslaan</button>
+</div>
+</main>
+</section>
+
+<section id="logsquash" class="screen">
+<main>
+<div class="titlebar"><h1>Squash</h1></div>
+<div class="whitecard">
+<h2>Nieuwe sessie</h2><p>Hou simpel bij wanneer je gespeeld hebt.</p>
+<div class="field" style="margin-top:13px"><label>Duur</label><input id="sqtime" placeholder="60 min"></div>
+<div class="field" style="margin-top:9px"><label>Notitie</label><input id="sqnote" placeholder="Goede wedstrijd"></div>
+<button class="cta" onclick="save('squash')">Sessie opslaan</button>
+</div>
+</main>
+</section>
+
+<section id="calendar" class="screen">
+<main>
+<div class="titlebar"><h1>Kalender</h1><span>＋</span></div>
+<div class="calendar">
+<div class="month"><span>‹</span><span>September 2026</span><span>›</span></div>
+<div class="days"><b>Ma</b><b>Di</b><b>Wo</b><b>Do</b><b>Vr</b><b>Za</b><b>Zo</b></div>
+<div class="nums" id="cal"></div>
+</div>
+<div class="label">6 september 2026</div>
+<div class="activity"><div class="check">+</div><div><strong>Activiteit toevoegen</strong><small>Kracht, MTB, run of squash</small></div></div>
+</main>
+</section>
+
+<section id="data" class="screen">
+<main>
+<div class="titlebar"><h1>Progressie</h1></div>
+<div class="segment"><span class="seg on">Overzicht</span><span class="seg">PR's</span><span class="seg">Volume</span><span class="seg">Sporten</span></div>
+<div class="data-hero"><small>ALLE SPORTEN · DIT JAAR</small><div class="big" id="ds">0</div><span class="trend">sportmomenten</span></div>
+<div class="metric-grid">
+<div class="metric"><b id="dk">0</b><small>MTB kilometer</small></div>
+<div class="metric"><b id="dr">0</b><small>Run kilometer</small></div>
+<div class="metric"><b id="dstr">0</b><small>Kracht sessies</small></div>
+<div class="metric"><b id="dsq">0</b><small>Squash sessies</small></div>
+</div>
+<div class="data-section chart"><div class="charthead"><b>Sportmomenten</b><span>laatste 8 weken</span></div><div class="bars" id="bars"></div></div>
+<div class="data-section whitecard"><h2>Sportverdeling</h2><div id="rows"></div></div>
+</main>
+</section>
+</div>
+
+<nav class="premium-nav">
+<button class="active" data-s="home" onclick="show('home')"><span class="navicon homeicon"></span><small>Vandaag</small></button>
+<button data-s="train" onclick="show('train')"><span class="navicon dumbbell"></span><small>Workouts</small></button>
+<button data-s="calendar" onclick="show('calendar')"><span class="navicon calendaricon"></span><small>Kalender</small></button>
+<button data-s="data" onclick="show('data')"><span class="navicon charticon"></span><small>Data</small></button>
+<button data-s="choose" onclick="show('choose')"><span class="navicon moreicon"></span><small>Meer</small></button>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const KEY='louweFitnessV2';
+let d=JSON.parse(localStorage.getItem(KEY)||'{"strength":0,"mtb":[],"run":[],"squash":[],"dates":[]}');
+
+function persist(){
+localStorage.setItem(KEY,JSON.stringify(d));
+update();
+}
+
+function show(id){
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+document.querySelectorAll('.premium-nav button').forEach(b=>b.classList.toggle('active',b.dataset.s===id));
+if(id==='data')renderData();
+if(id==='calendar')renderCal();
+}
+
+function toast(t){
+let e=document.getElementById('toast');
+e.textContent=t;
+e.classList.add('show');
+setTimeout(()=>e.classList.remove('show'),1700);
+}
+
+function save(type){
+let x={date:new Date().toISOString()};
+if(type==='mtb'){
+x.km=+document.getElementById('rkm').value||0;
+x.hm=+document.getElementById('rhm').value||0;
+d.mtb.push(x);
+}
+if(type==='run'){
+x.km=+document.getElementById('run').value||0;
+x.time=document.getElementById('runtime').value;
+d.run.push(x);
+}
+if(type==='squash'){
+x.time=document.getElementById('sqtime').value;
+x.note=document.getElementById('sqnote').value;
+d.squash.push(x);
+}
+d.dates.push(x.date);
+persist();
+toast('Opgeslagen');
+show('home');
+}
+
+function update(){
+let total=d.strength+d.mtb.length+d.run.length+d.squash.length;
+document.getElementById('weekCount').textContent=total;
+document.getElementById('weekMin').textContent='—';
+document.getElementById('weekPR').textContent='0';
+
+document.getElementById('recent').innerHTML=total?
+'<div class="check">✓</div><div><strong>Laatste activiteit</strong><small>Je voortgang wordt bijgehouden.</small></div><span class="chev">›</span>':
+'<div class="check">+</div><div><strong>Nog geen activiteit</strong><small>Je data verschijnt hier.</small></div><span class="chev">›</span>';
+}
+
+const exs=[
+['Goblet Squat','GS','Onderlichaam'],
+['Push-up','PU','Bovenlichaam'],
+['Kettlebell Row','KR','Rug'],
+['Bulgarian Split Squat','BS','Onderlichaam'],
+['KB Romanian Deadlift','RD','Achterzijde benen'],
+['Ab Wheel','AW','Core'],
+['Farmer Carry','FC','Full body']
+];
+
+let ei=0,seti=0;
+
+function startWorkout(n){
+document.getElementById('wname').textContent=n;
+ei=0;
+seti=0;
+renderEx();
+show('workout');
+}
+
+function renderEx(){
+let x=exs[ei];
+document.getElementById('eno').textContent=(ei+1)+' van 7';
+document.getElementById('ename').textContent=x[0];
+document.getElementById('emeta').textContent=x[2]+' · 4 sets · 6–10 reps';
+document.getElementById('eart').innerHTML='<span class="exercise-mark">'+x[1]+'</span><div class="media-caption">TECHNIQUE · CONTROL</div>';
+
+document.getElementById('sets').innerHTML=[1,2,3,4].map((n,i)=>
+`<div class="set">
+<span>${n}</span>
+<input placeholder="kg">
+<input placeholder="reps">
+<button class="ok ${i<seti?'done':''}" onclick="doneSet(${i})">${i<seti?'✓':''}</button>
+</div>`).join('');
+}
+
+function doneSet(i){
+seti=Math.max(seti,i+1);
+renderEx();
+}
+
+function nextSet(){
+if(ei<6){
+ei++;
+seti=0;
+renderEx();
+}else{
+d.strength++;
+d.dates.push(new Date().toISOString());
+persist();
+toast('Workout afgerond');
+show('home');
+}
+}
+
+let ti;
+
+function timer(){
+clearInterval(ti);
+let s=120;
+document.getElementById('clock').textContent='02:00';
+ti=setInterval(()=>{
+s--;
+document.getElementById('clock').textContent=`0${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
+if(s<=0){
+clearInterval(ti);
+toast('Rust voorbij');
+}
+},1000);
+}
+
+function renderData(){
+let km=d.mtb.reduce((a,x)=>a+x.km,0);
+let rk=d.run.reduce((a,x)=>a+x.km,0);
+
+document.getElementById('ds').textContent=d.strength+d.mtb.length+d.run.length+d.squash.length;
+document.getElementById('dk').textContent=km.toFixed(1);
+document.getElementById('dr').textContent=rk.toFixed(1);
+document.getElementById('dstr').textContent=d.strength;
+document.getElementById('dsq').textContent=d.squash.length;
+
+document.getElementById('bars').innerHTML=[2,4,1,5,3,6,4,7].map((n,i)=>
+`<div class="barw"><div class="bar" style="height:${n*12}px"></div><small>W${i+1}</small></div>`
+).join('');
+
+document.getElementById('rows').innerHTML=[
+['K','Kracht',d.strength],
+['M','Mountainbike',d.mtb.length],
+['R','Hardlopen',d.run.length],
+['S','Squash',d.squash.length]
+].map(x=>`<div class="row"><span>${x[0]} &nbsp;${x[1]}</span><small>${x[2]} sessies</small></div>`).join('');
+}
+
+function renderCal(){
+let el=document.getElementById('cal');
+let a=[];
+for(let i=1;i<=30;i++){
+let hit=d.dates.some(z=>new Date(z).getDate()===i);
+a.push(`<span class="day ${hit?'green':''}">${i}</span>`);
+}
+el.innerHTML=a.join('');
+}
+
+update();
+</script>
+</body>
+</html>
