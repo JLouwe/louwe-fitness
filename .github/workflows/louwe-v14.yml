@@ -36,7 +36,7 @@ jobs:
           s=s.replace(old,new)
           s=s.replace("let cat='full',selected=null,sessionIndex=0,doneSets=[],restTimer=null,restLeft=90,calDate=new Date();", "let cat='full',selected=null,sessionIndex=0,doneSets=[],restTimer=null,restLeft=90,calDate=new Date(),homeDayOffset=0;")
           start=s.index('function home(){')
-          end=s.index('\\nfunction sportHTML()', start)
+          end=s.index('\nfunction sportHTML()', start)
           home_js='''function getHomeDate(){let d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+homeDayOffset);return d}function changeDay(n){homeDayOffset+=n;home()}function home(){let d=getHomeDate(),today=dateKey(),k=dateKey(d),isToday=k===today;document.getElementById('dayMode').textContent=isToday?'TODAY':'DAY';document.getElementById('dayTitle').textContent=d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'short'}).toUpperCase();document.getElementById('heroTitle').textContent=isToday?'Vandaag.':d.toLocaleDateString('nl-NL',{weekday:'long',day:'numeric',month:'long'}).replace(/^./,c=>c.toUpperCase());renderRings();document.getElementById('recommend').innerHTML=`<div class="recommend"><div class="rec"><div><div class="ey">VOOR JOU</div><h2>Full body A</h2><p>7 oefeningen · grote bewegingen · duidelijke rust.</p></div><div class="recBottom"><span class="pill">45 min · 7 oefeningen</span><button class="primary" onclick="cat='full';go('workouts')">Start</button></div></div></div>`;sportHTML();weekHTML();recentHTML()}function renderRings(){let s=startWeek(new Date()),e=new Date(s);e.setDate(e.getDate()+7);let a=db.activities.filter(x=>{let d=new Date(x.date+'T12:00:00');return d>=s&&d<e}),min=a.reduce((q,x)=>q+(Number(x.duration)||0),0),sessions=a.length,activeDays=new Set(a.map(x=>x.date)).size;let activity=Math.min(100,Math.round((min/300)*70+(sessions/5)*30));let data=[['activity',activity,'ACTIVITY',`${activeDays}/7 actieve dagen`,'#9dc0a5'],['time',min/300*100,'TRAINING',`${Math.floor(min/60)}u ${min%60}m deze week`,'#d0b447'],['sessions',sessions/6*100,'SESSIONS',`${sessions} trainingen`,'#52a9d2']];document.getElementById('rings').innerHTML=data.map(x=>`<div class="ringCard"><div class="ring" style="--pct:${Math.min(100,x[1])};--ring:${x[4]}"><div class="ringInner"><div class="ringValue">${x[0]==='activity'?x[1]:x[0]==='time'?Math.floor(min/60)+'<small>h</small>':sessions}</div></div></div><div class="ringLabel">${x[2]}</div><div class="ringSub">${x[3]}</div></div>`).join('')}'''
           s=s[:start]+home_js+s[end:]
           p.write_text(s)
@@ -49,5 +49,3 @@ jobs:
           git diff --cached --quiet && exit 0
           git commit -m 'feat: whoop-inspired today dashboard v14'
           git push
-
-# trigger-v14
