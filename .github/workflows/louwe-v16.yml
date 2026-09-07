@@ -1,0 +1,93 @@
+name: Louwe v16
+
+on:
+  push:
+    paths:
+      - '.github/workflows/louwe-v16.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  v16:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Apply v16 month-first UX
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          p=Path('index.html')
+          s=p.read_text()
+
+          # Global wording cleanup: the Today dashboard is month-first.
+          s=s.replace('Deze week</span>','Deze maand</span>')
+          s=s.replace('>Deze week</h2>','>Deze maand</h2>')
+          s=s.replace('>deze week<','>deze maand<')
+          s=s.replace('deze week`','deze maand`')
+          s=s.replace('deze week"','deze maand"')
+          s=s.replace('deze week\'','deze maand\'')
+          s=s.replace('deze week</span>','deze maand</span>')
+
+          # v16 polish: keep the existing home composition, but make the hierarchy calmer.
+          css=r'''
+          /* v16 — month-first UX polish; home composition intentionally preserved */
+          .v16MonthHint{font-size:6px;color:#687573;text-transform:uppercase;letter-spacing:.1em;font-weight:900}
+          .v16MonthBar{height:4px;background:#202b2c;border-radius:99px;overflow:hidden;margin-top:10px}
+          .v16MonthBar i{display:block;height:100%;width:var(--w);background:#9aa9a3;border-radius:99px}
+          .v16Compare{display:flex;justify-content:space-between;align-items:center;margin-top:8px;color:#687573;font-size:6px}
+          .v16Compare strong{color:#aab4b1;font-size:7px}
+          .v16Soft{transition:transform .18s ease,opacity .18s ease}
+          .sport,.workoutCard,.metric,.weekCard,.recentItem,.recommend{transition:transform .16s ease,border-color .16s ease,background .16s ease}
+          .sport:active,.workoutCard:active,.metric:active,.weekCard:active,.recentItem:active,.recommend:active{transform:scale(.992)}
+          .nav button{transition:opacity .16s ease,transform .16s ease}
+          .nav button:active{transform:scale(.94)}
+          '''
+          if '/* v16 — month-first UX polish' not in s:
+              s=s.replace('</style>',css+'\n</style>',1)
+
+          # Replace weekly ring calculation with a calendar-month calculation.
+          new_rings=r'''function renderRings(){
+            let now=new Date(),s=new Date(now.getFullYear(),now.getMonth(),1),e=new Date(now.getFullYear(),now.getMonth()+1,1);
+            let a=db.activities.filter(x=>{let d=new Date(x.date+'T12:00:00');return d>=s&&d<e});
+            let min=a.reduce((q,x)=>q+(Number(x.duration)||0),0),sessions=a.length,activeDays=new Set(a.map(x=>x.date)).size;
+            let daysInMonth=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
+            let activity=Math.min(100,Math.round((min/1200)*70+(sessions/16)*30));
+            let data=[['activity',activity,'ACTIVITY',`${activeDays}/${daysInMonth} actieve dagen`,'#9dc0a5'],['time',min/1200*100,'TRAINING',`${Math.floor(min/60)}u ${min%60}m deze maand`,'#d0b447'],['sessions',sessions/16*100,'SESSIONS',`${sessions} trainingen deze maand`,'#52a9d2']];
+            document.getElementById('rings').innerHTML=data.map(x=>`<div class="ringCard"><div class="ring" style="--pct:${Math.min(100,x[1])};--ring:${x[4]}"><div class="ringInner"><div class="ringValue">${x[0]==='activity'?x[1]:x[0]==='time'?Math.floor(min/60)+'<small>h</small>':sessions}</div></div></div><div class="ringLabel">${x[2]}</div><div class="ringSub">${x[3]}</div></div>`).join('')
+          }'''
+          s=re.sub(r'function renderRings\(\)\{.*?\n\}function sportHTML',new_rings+'\nfunction sportHTML',s,flags=re.S)
+
+          # Replace sport cards' weekly figures with month-to-date figures.
+          new_sport=r'''function monthRange(){let n=new Date();return [new Date(n.getFullYear(),n.getMonth(),1),new Date(n.getFullYear(),n.getMonth()+1,1)]}
+          function monthActivities(t){let [s,e]=monthRange();return db.activities.filter(x=>{let d=new Date(x.date+'T12:00:00');return x.type===t&&d>=s&&d<e})}
+          function monthCount(t){return monthActivities(t).length}
+          function sportHTML(){let types=['strength','mtb','run','squash'];document.getElementById('sportGrid').innerHTML=types.map(t=>{let aa=monthActivities(t),w=aa.length,a=latest(t),val=t==='strength'?w:t==='mtb'||t==='run'?fmt(aa.reduce((q,x)=>q+(Number(x.km)||0),0)):aa.reduce((q,x)=>q+(Number(x.duration)||0),0),unit=t==='strength'?'sessies':t==='mtb'||t==='run'?'km':'min';return `<button class="sport ${t}" onclick="${t==='strength'?"cat='full';go('workouts')":`openLog('${t}')`}"><div class="sportIcon">${icon(t)}</div><h3>${META[t][0]}</h3><strong>${val}</strong><small>${unit}${a?' · laatst '+fmtDate(a.date):' · nog geen activiteit'}</small><b>›</b></button>`}).join('')}'''
+          s=re.sub(r'function sportHTML\(\)\{.*?\n\}function weekHTML',new_sport+'\nfunction weekHTML',s,flags=re.S)
+
+          # Keep the existing card position/shape, but make it a month summary instead of a week summary.
+          new_month=r'''function weekHTML(){let [s,e]=monthRange(),a=db.activities.filter(x=>{let d=new Date(x.date+'T12:00:00');return d>=s&&d<e}),min=a.reduce((q,x)=>q+(Number(x.duration)||0),0),km=a.reduce((q,x)=>q+(Number(x.km)||0),0),days=[...new Set(a.map(x=>x.date))].length,monthName=s.toLocaleDateString('nl-NL',{month:'long'});document.getElementById('weekLabel').textContent=`${days} actieve dagen`;document.getElementById('weekCard').innerHTML=`<div class="weekCard"><div class="weekTop"><strong>${a.length}</strong><span>sessies in ${monthName}</span></div><div class="v16MonthBar"><i style="--w:${Math.min(100,a.length/16*100)}%"></i></div><div class="v16Compare"><span>maandactiviteit</span><strong>${Math.floor(min/60)}u ${min%60}m training</strong></div><div class="weekStats"><div class="ws"><strong>${min}</strong><span>minuten</span></div><div class="ws"><strong>${fmt(km)}</strong><span>km</span></div><div class="ws"><strong>${monthCount('strength')}</strong><span>kracht</span></div><div class="ws"><strong>${monthCount('mtb')+monthCount('run')+monthCount('squash')}</strong><span>sport</span></div></div></div>`}'''
+          s=re.sub(r'function weekHTML\(\)\{.*?\n\}function recentHTML',new_month+'\nfunction recentHTML',s,flags=re.S)
+
+          # Data tab: current month, with a simple monthly activity chart.
+          new_data=r'''function renderData(){let [s,e]=monthRange(),a=db.activities.filter(x=>{let d=new Date(x.date+'T12:00:00');return d>=s&&d<e}),km=a.reduce((q,x)=>q+(Number(x.km)||0),0),min=a.reduce((q,x)=>q+(Number(x.duration)||0),0);document.getElementById('metrics').innerHTML=`<div class="metric"><small>Sessies deze maand</small><strong>${a.length}</strong></div><div class="metric"><small>Kracht</small><strong>${a.filter(x=>x.type==='strength').length}</strong></div><div class="metric"><small>Afstand</small><strong>${fmt(km)} km</strong></div><div class="metric"><small>Trainingstijd</small><strong>${min} min</strong></div>`;let days=new Date(s.getFullYear(),s.getMonth()+1,0).getDate(),bars=Array.from({length:days},(_,i)=>{let d=new Date(s.getFullYear(),s.getMonth(),i+1);return {v:a.filter(x=>x.date===dateKey(d)).length}}),max=Math.max(1,...bars.map(x=>x.v));document.getElementById('chart').innerHTML=bars.map(x=>`<div class="barWrap" style="position:relative"><div class="bar" style="height:${Math.max(3,x.v/max*100)}%"></div></div>`).join('')}'''
+          s=re.sub(r'function renderData\(\)\{.*?\n\}function showExercise',new_data+'\nfunction showExercise',s,flags=re.S)
+
+          # Ensure the dynamic v15 balance section also says month.
+          s=s.replace('<h2>Deze week</h2><span>belasting</span>','<h2>Deze maand</h2><span>activiteit</span>')
+          s=s.replace('<span>3 sess.</span>','<span>3 sess.</span>')
+
+          p.write_text(s)
+          PY
+
+      - name: Commit v16
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet || git commit -m 'feat: month-first metrics and UX polish v16'
+          git push
