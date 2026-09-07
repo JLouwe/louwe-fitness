@@ -1,0 +1,107 @@
+name: Louwe v15
+
+on:
+  push:
+    paths:
+      - '.github/workflows/louwe-v15.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  v15:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Apply v15 Today layer
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('index.html')
+          s = p.read_text()
+
+          css = r'''
+          /* v15 — compact WHOOP-style Today layer */
+          .v15Context{margin-top:11px;border-top:1px solid #202a2b;border-bottom:1px solid #202a2b;padding:10px 0 9px;display:grid;grid-template-columns:repeat(3,1fr)}
+          .v15Metric{min-width:0;padding:0 9px;border-left:1px solid #202a2b}
+          .v15Metric:first-child{border-left:0;padding-left:0}
+          .v15Metric:last-child{padding-right:0}
+          .v15Metric label{display:block;color:#65716f;font-size:5.5px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+          .v15Metric strong{display:block;margin-top:3px;color:#dce3e0;font-size:14px;line-height:1;letter-spacing:-.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+          .v15Metric span{display:block;margin-top:3px;color:#596563;font-size:5.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+          .v15Section{margin-top:18px}
+          .v15SectionHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+          .v15SectionHead h2{margin:0;font-size:13px;letter-spacing:-.035em}
+          .v15SectionHead span{font-size:6px;color:#667371;text-transform:uppercase;letter-spacing:.1em;font-weight:900}
+          .v15Balance{display:grid;gap:1px;border-top:1px solid #202a2b}
+          .v15BalanceRow{height:34px;display:grid;grid-template-columns:58px 1fr 34px;align-items:center;gap:8px;border-bottom:1px solid #202a2b}
+          .v15BalanceRow b{font-size:7px;font-weight:800;color:#9aa5a3}
+          .v15Track{height:3px;background:#202b2c;border-radius:99px;overflow:hidden}
+          .v15Track i{display:block;height:100%;width:var(--w);background:var(--c);border-radius:99px}
+          .v15BalanceRow em{font-style:normal;text-align:right;font-size:6px;color:#65716f}
+          .v15Insight{margin-top:12px;border:1px solid #293536;border-radius:11px;background:#111a1b;padding:11px 12px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+          .v15Insight small{display:block;font-size:5.5px;color:#687573;text-transform:uppercase;letter-spacing:.12em;font-weight:900}
+          .v15Insight strong{display:block;margin-top:4px;font-size:13px;letter-spacing:-.035em}
+          .v15Insight p{margin:4px 0 0;color:#75817f;font-size:6.5px;line-height:1.35}
+          .v15Arrow{width:25px;height:25px;border:1px solid #303c3d;border-radius:50%;display:grid;place-items:center;color:#8b9694;font-size:13px}
+          .v15Divider{height:1px;background:#202a2b;margin-top:18px}
+          @media(max-width:360px){.v15Metric strong{font-size:12px}.v15BalanceRow{grid-template-columns:52px 1fr 28px}}
+          '''
+          if '/* v15 — compact WHOOP-style Today layer */' not in s:
+              s=s.replace('</style>', css+'\n</style>', 1)
+
+          context = '''<div class="v15Context" aria-label="Today context">
+            <div class="v15Metric"><label>ACTIVITY</label><strong id="v15Activity">—</strong><span>vandaag</span></div>
+            <div class="v15Metric"><label>TRAINING</label><strong id="v15Training">—</strong><span>deze week</span></div>
+            <div class="v15Metric"><label>SESSIONS</label><strong id="v15Sessions">—</strong><span>deze week</span></div>
+          </div>'''
+          if 'id="v15Activity"' not in s:
+              s=s.replace('<div class="rings">', context+'\n<div class="rings">', 1)
+
+          balance = '''<div class="v15Section">
+            <div class="v15SectionHead"><h2>Deze week</h2><span>belasting</span></div>
+            <div class="v15Balance">
+              <div class="v15BalanceRow"><b>Kracht</b><div class="v15Track"><i style="--w:72%;--c:#9dc0a5"></i></div><em>3 sess.</em></div>
+              <div class="v15BalanceRow"><b>MTB</b><div class="v15Track"><i style="--w:86%;--c:#d0b447"></i></div><em>2 ritten</em></div>
+              <div class="v15BalanceRow"><b>Run</b><div class="v15Track"><i style="--w:42%;--c:#52a9d2"></i></div><em>1 run</em></div>
+              <div class="v15BalanceRow"><b>Squash</b><div class="v15Track"><i style="--w:58%;--c:#9d87c6"></i></div><em>1 sess.</em></div>
+            </div>
+          </div>'''
+          if 'class="v15Balance"' not in s:
+              marker='<div class="recommend">'
+              if marker in s:
+                  s=s.replace(marker, balance+'\n<div class="v15Insight"><div><small>LOUWE FOCUS</small><strong>Kies wat vandaag past.</strong><p>Gebruik je recente activiteit als context — niet als beperking.</p></div><div class="v15Arrow">›</div></div>\n'+marker, 1)
+
+          js = r'''
+          <script>
+          function syncV15(){
+            try{
+              const rings=[...document.querySelectorAll('.ringCard .ringValue')];
+              const vals=rings.map(x=>x.textContent.trim()).filter(Boolean);
+              const a=document.getElementById('v15Activity'),t=document.getElementById('v15Training'),ss=document.getElementById('v15Sessions');
+              if(a&&vals[0])a.textContent=vals[0];
+              if(t&&vals[1])t.textContent=vals[1];
+              if(ss&&vals[2])ss.textContent=vals[2];
+            }catch(e){}
+          }
+          document.addEventListener('DOMContentLoaded',()=>{syncV15();setTimeout(syncV15,300);setTimeout(syncV15,1000)});
+          </script>
+          '''
+          if 'function syncV15' not in s:
+              s=s.replace('</body>', js+'\n</body>', 1)
+
+          # Keep existing data key compatible while marking the visual layer.
+          p.write_text(s)
+          PY
+
+      - name: Commit v15
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet || git commit -m 'feat: whoop-style today layer v15'
+          git push
