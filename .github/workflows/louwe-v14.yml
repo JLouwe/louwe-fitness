@@ -1,0 +1,51 @@
+name: Build Louwe Fitness v14
+
+on:
+  push:
+    paths:
+      - '.github/workflows/louwe-v14.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply v14 Today UX
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          if 'id="rings"' in s:
+              print('v14 already present')
+              raise SystemExit(0)
+          s=s.replace('.top{height:48px;padding:9px 14px;display:flex;align-items:center;justify-content:space-between}', '.top{height:42px;padding:7px 14px;display:flex;align-items:center;justify-content:space-between}')
+          s=s.replace('.brand{font-size:11px;font-weight:800;letter-spacing:-.03em}', '.brand{font-size:10px;font-weight:800;letter-spacing:-.03em;color:#dce4e1}')
+          s=s.replace('.hero{height:154px;', '.dayNav{height:47px;padding:6px 14px 7px;display:grid;grid-template-columns:30px 1fr 30px;align-items:center;border-top:1px solid rgba(255,255,255,.035);border-bottom:1px solid #202a2b;background:#0c1314}.dayNav button{width:26px;height:26px;border:1px solid #263234;border-radius:50%;background:#131c1d;color:#8d9997;font-size:16px;line-height:1}.dayCenter{text-align:center}.dayCenter span{display:block;font-size:6px;letter-spacing:.18em;color:#687573;font-weight:900}.dayCenter strong{display:block;font-size:9px;margin-top:2px;color:#dce3e0;font-weight:800}.hero{height:126px;')
+          s=s.replace('.heroText{position:absolute;left:18px;bottom:19px}', '.heroText{position:absolute;left:18px;bottom:16px}')
+          s=s.replace('.hero h1{font-size:29px;', '.hero h1{font-size:26px;')
+          needle='.recommend{height:154px;'
+          ring_css=' .rings{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}.ringCard{min-width:0;text-align:center;padding:4px 0 2px}.ring{width:76px;height:76px;margin:0 auto 7px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--ring) calc(var(--pct)*1%),#263133 0);position:relative}.ring:after{content:"";position:absolute;inset:6px;border-radius:50%;background:#0b1112}.ringInner{position:relative;z-index:1}.ringValue{font-size:18px;font-weight:900;letter-spacing:-.06em;line-height:1}.ringValue small{font-size:7px;color:#7d8987;margin-left:1px}.ringLabel{font-size:6px;color:#71807f;text-transform:uppercase;letter-spacing:.11em;font-weight:900}.ringSub{font-size:6px;color:#53605e;margin-top:3px}.homeSection{margin-top:17px}.homeSection:first-child{margin-top:13px}.homeSection .head{margin-bottom:8px}.sportRow{gap:5px}.sport{height:70px;padding:7px 6px}.sport h3{font-size:7.5px}.sport strong{font-size:14px}.sport small{font-size:5px}.weekCard{padding:11px}.sectionRule{height:1px;background:#20292a;margin:18px 0 0}'
+          s=s.replace(needle, ring_css+needle)
+          old='''<section id="home" class="screen active"><div class="top"><b class="brand">Louwe Fitness</b><div class="topRight"><button class="mini" onclick="openLog('run')">+</button></div></div><div class="hero"><div class="heroText"><div class="ey" id="dateLabel"></div><h1>Vandaag.</h1></div></div><div class="content"><div class="section"><div class="head"><h2>Voor jou</h2><button onclick="go('workouts')">Alle workouts</button></div><div id="recommend"></div></div><div class="section"><div class="head"><h2>Jouw sporten</h2><span>Deze week</span></div><div class="sportRow" id="sportGrid"></div></div><div class="section"><div class="head"><h2>Deze week</h2><span id="weekLabel"></span></div><div id="weekCard"></div></div><div class="section"><div class="head"><h2>Recente activiteit</h2><button onclick="go('calendar')">Agenda</button></div><div id="recent"></div></div></div></section>'''
+          new='''<section id="home" class="screen active"><div class="top"><b class="brand">Louwe Fitness</b><div class="topRight"><button class="mini" onclick="openLog('run')">+</button></div></div><div class="dayNav"><button onclick="changeDay(-1)">‹</button><div class="dayCenter"><span id="dayMode">TODAY</span><strong id="dayTitle"></strong></div><button onclick="changeDay(1)">›</button></div><div class="hero"><div class="heroText"><div class="ey">LOUWE FITNESS</div><h1 id="heroTitle">Vandaag.</h1></div></div><div class="content"><div class="rings" id="rings"></div><div class="homeSection"><div class="head"><h2>Voor jou</h2><button onclick="go('workouts')">Alle workouts</button></div><div id="recommend"></div></div><div class="homeSection"><div class="head"><h2>Jouw sporten</h2><span>Deze week</span></div><div class="sportRow" id="sportGrid"></div></div><div class="homeSection"><div class="head"><h2>Deze week</h2><span id="weekLabel"></span></div><div id="weekCard"></div></div><div class="homeSection"><div class="head"><h2>Recente activiteit</h2><button onclick="go('calendar')">Agenda</button></div><div id="recent"></div></div></div></section>'''
+          if old not in s: raise SystemExit('home block not found')
+          s=s.replace(old,new)
+          s=s.replace("let cat='full',selected=null,sessionIndex=0,doneSets=[],restTimer=null,restLeft=90,calDate=new Date();", "let cat='full',selected=null,sessionIndex=0,doneSets=[],restTimer=null,restLeft=90,calDate=new Date(),homeDayOffset=0;")
+          start=s.index('function home(){')
+          end=s.index('\\nfunction sportHTML()', start)
+          home_js='''function getHomeDate(){let d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+homeDayOffset);return d}function changeDay(n){homeDayOffset+=n;home()}function home(){let d=getHomeDate(),today=dateKey(),k=dateKey(d),isToday=k===today;document.getElementById('dayMode').textContent=isToday?'TODAY':'DAY';document.getElementById('dayTitle').textContent=d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'short'}).toUpperCase();document.getElementById('heroTitle').textContent=isToday?'Vandaag.':d.toLocaleDateString('nl-NL',{weekday:'long',day:'numeric',month:'long'}).replace(/^./,c=>c.toUpperCase());renderRings();document.getElementById('recommend').innerHTML=`<div class="recommend"><div class="rec"><div><div class="ey">VOOR JOU</div><h2>Full body A</h2><p>7 oefeningen · grote bewegingen · duidelijke rust.</p></div><div class="recBottom"><span class="pill">45 min · 7 oefeningen</span><button class="primary" onclick="cat='full';go('workouts')">Start</button></div></div></div>`;sportHTML();weekHTML();recentHTML()}function renderRings(){let s=startWeek(new Date()),e=new Date(s);e.setDate(e.getDate()+7);let a=db.activities.filter(x=>{let d=new Date(x.date+'T12:00:00');return d>=s&&d<e}),min=a.reduce((q,x)=>q+(Number(x.duration)||0),0),sessions=a.length,activeDays=new Set(a.map(x=>x.date)).size;let activity=Math.min(100,Math.round((min/300)*70+(sessions/5)*30));let data=[['activity',activity,'ACTIVITY',`${activeDays}/7 actieve dagen`,'#9dc0a5'],['time',min/300*100,'TRAINING',`${Math.floor(min/60)}u ${min%60}m deze week`,'#d0b447'],['sessions',sessions/6*100,'SESSIONS',`${sessions} trainingen`,'#52a9d2']];document.getElementById('rings').innerHTML=data.map(x=>`<div class="ringCard"><div class="ring" style="--pct:${Math.min(100,x[1])};--ring:${x[4]}"><div class="ringInner"><div class="ringValue">${x[0]==='activity'?x[1]:x[0]==='time'?Math.floor(min/60)+'<small>h</small>':sessions}</div></div></div><div class="ringLabel">${x[2]}</div><div class="ringSub">${x[3]}</div></div>`).join('')}'''
+          s=s[:start]+home_js+s[end:]
+          p.write_text(s)
+          PY
+      - name: Commit v14
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'feat: whoop-inspired today dashboard v14'
+          git push
